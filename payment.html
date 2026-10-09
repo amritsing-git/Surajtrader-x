@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SURAJTRADERX — NIFTY 15-Minute Breakout Trading Course. Educational purposes only.">
+<title>Payment | SURAJTRADERX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="payment">
+<div class="ambient ambient-1"></div><div class="ambient ambient-2"></div><div class="grid-bg"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="side-top">
+    <a class="brand" href="index.html">
+      <span class="brand-symbol"><i></i><i></i><i></i></span>
+      <span class="brand-name">SURAJ<span>TRADERX</span></span>
+    </a>
+    <button class="close-side" id="closeSide">×</button>
+  </div>
+  <div class="side-label">COURSE PLATFORM</div>
+  <nav class="side-nav">
+    <a data-page="home" href="index.html"><span>⌂</span>Home</a>
+    <a data-page="curriculum" href="curriculum.html"><span>▦</span>Curriculum</a>
+    <a data-page="pricing" href="pricing.html"><span>◇</span>Pricing</a>
+    <a data-page="apply" href="apply.html"><span>✎</span>Apply</a>
+    <a data-page="payment" href="payment.html"><span>₹</span>Payment</a>
+    <a data-page="about" href="about.html"><span>◈</span>About</a>
+    <a data-page="contact" href="contact.html"><span>◉</span>Contact</a>
+  </nav>
+  <div class="side-bottom">
+    <div class="risk-mini"><b>EDUCATIONAL ONLY</b><span>Trading involves risk. No profit guarantees.</span></div>
+    <a class="side-join" href="apply.html">JOIN NOW <b>↗</b></a>
+    <a class="support-mini" href="https://wa.me/919421460321" target="_blank" rel="noopener">WhatsApp Support</a>
+  </div>
+</aside>
+
+<div class="page">
+<header class="topbar">
+  <button class="menu-trigger" id="openSide" aria-label="Open menu"><i></i><i></i><i></i></button>
+  <div class="mobile-title">SURAJ<span>TRADERX</span></div>
+  <div class="topbar-right">
+    <span class="secure-badge">● EDUCATIONAL PLATFORM</span>
+    <a class="top-support" href="tel:+919421460321">94214 60321</a>
+  </div>
+</header>
+
+<main>
+
+<section class="page-section inner payment-page">
+  <div class="page-title reveal"><small>05 / PAYMENT</small><h1>Secure Your <em>Enrollment</em></h1><p>Choose your plan, verify the amount and pay through the official UPI details provided by SurajTraderX.</p></div>
+  <div class="pay-layout reveal">
+    <div class="order-card">
+      <div class="order-head"><span>ORDER SUMMARY</span><b id="payPlanLabel">BASIC COURSE</b></div>
+      <div class="selected-plan"><small>SELECTED PLAN</small><h2 id="payPlan">Basic</h2><strong id="payAmount">₹1499</strong></div>
+      <div class="amount-row"><span>Course access</span><b id="payAmountSmall">₹1499</b></div>
+      <div class="amount-row"><span>Payment type</span><b id="payType">One-time</b></div>
+      <div class="amount-total"><span>Total payable</span><b id="payTotal">₹1499</b></div>
+      <div class="plan-switch"><button data-plan="Basic" data-amount="1499">Basic ₹1499</button><button data-plan="Premium" data-amount="2499">Premium ₹2499</button><button data-plan="Renewal" data-amount="699">Renewal ₹699</button></div>
+    </div>
+    <div class="pay-method">
+      <div class="method-head"><div><small>UPI PAYMENT</small><h2>Pay via UPI</h2></div><span class="secure-lock">⌁ SECURE</span></div>
+      <div class="qr-area"><div id="qr"></div><div><p>Scan this QR using any supported UPI app.</p><small>Or use the button below to open your UPI app.</small></div></div>
+      <div class="upi-details"><span>OFFICIAL UPI ID</span><strong id="upiDisplay">YOUR-UPI@BANK</strong><button id="copyUpi">Copy</button></div>
+      <a id="upiPay" class="gold-btn full pay-now" href="#">Pay ₹1499 via UPI <b>↗</b></a>
+      <p class="pay-disclaimer">Before paying, confirm the official UPI ID and amount with SurajTraderX support. Never share your UPI PIN or OTP with anyone.</p>
+      <a class="whatsapp-pay" href="https://wa.me/919421460321?text=Hello%20SurajTraderX%2C%20I%20want%20to%20confirm%20the%20official%20UPI%20details%20for%20course%20enrollment." target="_blank" rel="noopener">Need payment help? WhatsApp 9421460321</a>
+    </div>
+  </div>
+  <div class="payment-note reveal"><b>Important:</b> This demo is ready for real UPI intent once the client's verified UPI ID is entered in <code>js/script.js</code>. Do not publish with the placeholder UPI ID.</div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-brand">
+    <a class="brand" href="index.html"><span class="brand-symbol"><i></i><i></i><i></i></span><span class="brand-name">SURAJ<span>TRADERX</span></span></a>
+    <p>© 2026 SurajTraderX — Educational Purpose Only. Trading involves risk.</p>
+  </div>
+  <div class="footer-links"><a href="contact.html">Support: 9421460321</a><a href="payment.html">Payment</a><a href="apply.html">Apply</a></div>
+</footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/script.js"></script>
+</body></html>
