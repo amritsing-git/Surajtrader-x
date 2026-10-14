@@ -1,0 +1,3706 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>Admin Panel — SURAJTRADERX</title>
+
+<link
+  rel="stylesheet"
+  href="style.css"
+>
+
+<link
+  rel="icon"
+  type="image/jpeg"
+  href="assets/srtx-logo.jpg"
+>
+
+<style>
+
+.admin-message{
+  margin:14px 0;
+  padding:14px 16px;
+  border-radius:14px;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.admin-success{
+  background:#ecfdf3;
+  border:1px solid #b7ebca;
+  color:#087443;
+}
+
+.admin-error{
+  background:#fff1f2;
+  border:1px solid #fecdd3;
+  color:#be123c;
+}
+
+.admin-info{
+  background:#f4f7ff;
+  border:1px solid #dbe5ff;
+  color:#304a80;
+}
+
+.payment-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  padding:18px 0;
+  border-bottom:1px solid #e8ebf1;
+}
+
+.payment-row:last-child{
+  border-bottom:0;
+}
+
+.payment-main{
+  min-width:0;
+}
+
+.payment-email{
+  font-weight:800;
+  word-break:break-word;
+}
+
+.payment-meta{
+  margin-top:6px;
+  color:#667085;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.payment-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  flex-shrink:0;
+}
+
+.status-pill{
+  display:inline-flex;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.status-pending{
+  background:#fff7df;
+  color:#9a6700;
+}
+
+.status-approved{
+  background:#eafaf1;
+  color:#087443;
+}
+
+.status-rejected{
+  background:#fff0f1;
+  color:#b42318;
+}
+
+.empty-box{
+  text-align:center;
+  padding:35px 18px;
+  color:#667085;
+}
+
+.module-card{
+  border:1px solid #e6e9f0;
+  border-radius:18px;
+  padding:18px;
+  margin-top:12px;
+  background:#fff;
+}
+
+.price-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.pricing-card{
+  border:1px solid #e2e8f0;
+  border-radius:18px;
+  padding:18px;
+  background:#fff;
+}
+
+.separate-product{
+  margin-top:15px;
+  padding:15px;
+  border-radius:16px;
+  border:1px solid #dbe5ff;
+  background:#f7f9ff;
+}
+
+.product-badge{
+  display:inline-flex;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#eef4ff;
+  color:#2448a8;
+  font-size:12px;
+  font-weight:800;
+}
+
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(8,15,30,.55);
+  backdrop-filter:blur(5px);
+}
+
+.modal-backdrop.show{
+  display:flex;
+}
+
+.admin-modal{
+  width:min(480px,100%);
+  background:#fff;
+  border-radius:24px;
+  padding:26px;
+  box-shadow:0 24px 70px rgba(0,0,0,.25);
+}
+
+.admin-modal h3{
+  margin:10px 0;
+}
+
+.admin-modal p{
+  color:#667085;
+  line-height:1.6;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:22px;
+}
+
+.danger-btn{
+  background:#b42318 !important;
+  color:#fff !important;
+}
+
+@media(max-width:700px){
+
+  .payment-row{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .payment-actions{
+    width:100%;
+  }
+
+  .payment-actions .btn{
+    flex:1;
+  }
+
+  .price-grid{
+    grid-template-columns:1fr;
+  }
+
+  .modal-actions{
+    flex-direction:column-reverse;
+  }
+
+  .modal-actions .btn{
+    width:100%;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="topbar">
+  SURAJTRADERX ADMIN • Secure control center
+</div>
+
+
+<header class="nav">
+
+  <div class="container nav-inner">
+
+    <a
+      class="brand"
+      href="index.html"
+    >
+
+      <img
+        class="brand-logo"
+        src="assets/srtx-logo.jpg"
+        alt="SURAJTRADERX"
+      >
+
+      <span>
+        SURAJTRADERX / ADMIN
+      </span>
+
+    </a>
+
+
+    <div
+      class="actions"
+      style="margin:0"
+    >
+
+      <a
+        class="btn"
+        href="index.html"
+      >
+        View Site
+      </a>
+
+      <button
+        class="hamb"
+        type="button"
+        onclick="toggleAdminMenu()"
+        aria-label="Menu"
+      >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<div class="dashboard">
+
+
+  <aside
+    class="sidebar"
+    id="adminSidebar"
+  >
+
+    <div class="side-title">
+      Workspace
+    </div>
+
+
+    <a
+      class="side-link active"
+      href="#overview"
+    >
+      Overview
+    </a>
+
+
+    <a
+      class="side-link"
+      href="#payments"
+    >
+      Payment Requests
+    </a>
+
+
+    <a
+      class="side-link"
+      href="#curriculum"
+    >
+      Curriculum
+    </a>
+
+
+    <a
+      class="side-link"
+      href="#pricing"
+    >
+      Pricing
+    </a>
+
+
+    <a
+      class="side-link"
+      href="#students"
+    >
+      Students
+    </a>
+
+
+    <a
+      class="side-link"
+      href="#settings"
+    >
+      Settings
+    </a>
+
+  </aside>
+
+
+  <main class="dash-main">
+
+    <div id="app">
+
+      <div class="card">
+        Loading admin…
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<!-- CONFIRM MODAL -->
+
+<div
+  class="modal-backdrop"
+  id="confirmModal"
+>
+
+  <div class="admin-modal">
+
+    <span
+      class="tag"
+      id="modalTag"
+    >
+      Confirm
+    </span>
+
+
+    <h3 id="modalTitle">
+      Confirm action
+    </h3>
+
+
+    <p id="modalText">
+      Are you sure?
+    </p>
+
+
+    <div class="modal-actions">
+
+      <button
+        class="btn"
+        id="modalCancel"
+        type="button"
+      >
+        Cancel
+      </button>
+
+
+      <button
+        class="btn btn-dark"
+        id="modalConfirm"
+        type="button"
+      >
+        Continue
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+/* Self-contained admin configuration. This page no longer depends on
+   config.js, app.js or supabase.js, so a missing/broken helper file
+   cannot prevent the admin panel from booting. */
+window.SRTX_CONFIG = {
+  SUPABASE_URL: "https://njnssykkfftxteirfhzk.supabase.co",
+  SUPABASE_ANON_KEY: "sb_publishable_b45W7ASaNEW2NdzuL9zfqw_9Gkxx7PR",
+  UPI_ID: "9421460322@ybl",
+  UPI_NAME: "SURAJ BHAGWAN JAWALE",
+  SUPPORT_PHONE: "9421460322",
+  WHATSAPP: "https://wa.me/919421460322",
+  WHATSAPP_GROUP: "https://chat.whatsapp.com/F43rQ33XwK493B5eX98pRA?mode=gi_t",
+  TELEGRAM: "https://t.me/surajtraderx",
+  TELEGRAM_COURSE: "https://t.me/+8Vj_UMez_XA5NWQ1",
+  TELEGRAM_PREMIUM: "https://t.me/+Yw3zM7d5CpYzZTM1"
+};
+
+function safe(value){ return esc(value); }
+
+async function signOut(){
+  try{ if(S) await S.auth.signOut(); }catch(e){ console.error(e); }
+  location.href = "login.html";
+}
+
+</script>
+
+<script>
+
+let S = null;
+let ME = null;
+let PRICING = [];
+let pendingAction = null;
+
+
+/* =========================================================
+   FIXED PRODUCTS
+========================================================= */
+
+const NIFTY_COURSE = {
+
+  slug:
+    "nifty-15-minute-breakout",
+
+  title:
+    "NIFTY 15-Minute Breakout Strategy",
+
+  description:
+    "Structured educational course covering NIFTY concepts, breakout framework, risk management and backtesting."
+
+};
+
+
+const TELEGRAM_RENEWAL = {
+
+  slug:
+    "premium-telegram-renewal",
+
+  title:
+    "Premium Telegram Renewal",
+
+  description:
+    "Separate Premium Telegram renewal product. This product is independent from the NIFTY trading course."
+
+};
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+function esc(value){
+
+  return String(value ?? "")
+
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+function toggleAdminMenu(){
+
+  const sidebar =
+    document.getElementById(
+      "adminSidebar"
+    );
+
+  if(sidebar){
+
+    sidebar.classList.toggle(
+      "show"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+function showMessage(
+  type,
+  text
+){
+
+  const old =
+    document.querySelector(
+      ".admin-message"
+    );
+
+  if(old){
+    old.remove();
+  }
+
+
+  const box =
+    document.createElement(
+      "div"
+    );
+
+
+  box.className =
+    "admin-message " +
+    (
+      type === "success"
+        ? "admin-success"
+        : type === "error"
+          ? "admin-error"
+          : "admin-info"
+    );
+
+
+  box.textContent =
+    text;
+
+
+  const app =
+    document.getElementById(
+      "app"
+    );
+
+
+  app.prepend(box);
+
+
+  window.scrollTo({
+
+    top:0,
+
+    behavior:"smooth"
+
+  });
+
+}
+
+
+/* =========================================================
+   CONFIRM MODAL
+========================================================= */
+
+function openConfirm(
+  title,
+  text,
+  buttonText,
+  danger,
+  callback
+){
+
+  document
+    .getElementById(
+      "modalTitle"
+    )
+    .textContent =
+    title;
+
+
+  document
+    .getElementById(
+      "modalText"
+    )
+    .textContent =
+    text;
+
+
+  document
+    .getElementById(
+      "modalConfirm"
+    )
+    .textContent =
+    buttonText;
+
+
+  document
+    .getElementById(
+      "modalConfirm"
+    )
+    .className =
+    danger
+      ? "btn danger-btn"
+      : "btn btn-dark";
+
+
+  document
+    .getElementById(
+      "modalTag"
+    )
+    .textContent =
+    danger
+      ? "Reject payment"
+      : "Approve payment";
+
+
+  pendingAction =
+    callback;
+
+
+  document
+    .getElementById(
+      "confirmModal"
+    )
+    .classList.add(
+      "show"
+    );
+
+}
+
+
+function closeConfirm(){
+
+  document
+    .getElementById(
+      "confirmModal"
+    )
+    .classList.remove(
+      "show"
+    );
+
+  pendingAction =
+    null;
+
+}
+
+
+document
+  .getElementById(
+    "modalCancel"
+  )
+  .addEventListener(
+    "click",
+    closeConfirm
+  );
+
+
+document
+  .getElementById(
+    "modalConfirm"
+  )
+  .addEventListener(
+    "click",
+    async function(){
+
+      const action =
+        pendingAction;
+
+      closeConfirm();
+
+      if(action){
+
+        await action();
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "confirmModal"
+  )
+  .addEventListener(
+    "click",
+    function(e){
+
+      if(e.target === this){
+
+        closeConfirm();
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   FIXED PRODUCT GET / CREATE
+========================================================= */
+
+async function getOrCreateProduct(
+  product
+){
+
+  const found =
+    await S
+
+      .from("courses")
+
+      .select(
+        "id,title,slug,description,published"
+      )
+
+      .eq(
+        "slug",
+        product.slug
+      )
+
+      .maybeSingle();
+
+
+  if(found.error){
+
+    throw new Error(
+      found.error.message
+    );
+
+  }
+
+
+  if(found.data){
+
+    return found.data;
+
+  }
+
+
+  const created =
+    await S
+
+      .from("courses")
+
+      .insert({
+
+        title:
+          product.title,
+
+        slug:
+          product.slug,
+
+        description:
+          product.description,
+
+        published:
+          true
+
+      })
+
+      .select()
+
+      .single();
+
+
+  if(created.error){
+
+    throw new Error(
+      "Could not create fixed product: " +
+      created.error.message
+    );
+
+  }
+
+
+  return created.data;
+
+}
+
+
+/* =========================================================
+   SAFE SUPABASE HELPERS
+========================================================= */
+
+function withTimeout(promise, ms, label){
+  return Promise.race([
+    promise,
+    new Promise((_, reject)=>{
+      setTimeout(()=>{
+        reject(new Error(label + " timed out. Check internet/Supabase connection."));
+      }, ms);
+    })
+  ]);
+}
+
+async function getAdminClient(){
+  if(!window.supabase){
+    throw new Error("Supabase library did not load. Check your internet connection.");
+  }
+
+  if(!window.SRTX_CONFIG ||
+     !SRTX_CONFIG.SUPABASE_URL ||
+     !SRTX_CONFIG.SUPABASE_ANON_KEY ||
+     SRTX_CONFIG.SUPABASE_URL.includes("PASTE_")){
+    throw new Error("Supabase configuration is missing in config.js.");
+  }
+
+  return window.supabase.createClient(
+    SRTX_CONFIG.SUPABASE_URL,
+    SRTX_CONFIG.SUPABASE_ANON_KEY
+  );
+}
+
+function showBootError(message){
+  const app = document.getElementById("app");
+  if(!app) return;
+
+  app.innerHTML = `
+    <div class="card">
+      <span class="tag">Admin Panel</span>
+      <h2>Admin panel could not load</h2>
+      <p class="muted" style="white-space:pre-wrap">${esc(message)}</p>
+      <div class="notice warn" style="margin-top:16px">
+        This admin page now contains its own Supabase configuration.
+        If this message appears again, the exact error above is the important part.
+      </div>
+      <button class="btn btn-dark" type="button"
+        onclick="location.reload()">Refresh</button>
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   BOOT
+========================================================= */
+
+
+async function boot(){
+
+  try{
+
+    /*
+      The admin panel creates its own Supabase client.
+      This prevents a stuck helper in another JS file from
+      leaving the page permanently on "Loading admin…".
+    */
+    S =
+      await getAdminClient();
+
+
+    const sessionResult =
+      await withTimeout(
+        S.auth.getSession(),
+        10000,
+        "Supabase session check"
+      );
+
+
+    if(
+      sessionResult.error ||
+      !sessionResult.data.session
+    ){
+
+      location.href =
+        "login.html";
+
+      return;
+
+    }
+
+
+    ME =
+      sessionResult.data.session.user;
+
+
+    const adminResult =
+      await withTimeout(
+        S
+          .from("admin_users")
+          .select("user_id")
+          .eq("user_id", ME.id)
+          .maybeSingle(),
+        10000,
+        "Admin permission check"
+      );
+
+
+    if(adminResult.error){
+
+      showBootError(
+        "Admin verification failed:\n" +
+        adminResult.error.message
+      );
+
+      return;
+
+    }
+
+
+    if(!adminResult.data){
+
+      document.getElementById("app").innerHTML = `
+
+        <div class="card">
+
+          <span class="tag">
+            Access denied
+          </span>
+
+          <h2>
+            This account is not an admin.
+          </h2>
+
+          <p class="muted">
+            Add the Auth user's UUID to admin_users.
+          </p>
+
+          <a
+            class="btn btn-dark"
+            href="student.html"
+          >
+            Go to Student Area
+          </a>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    await render();
+
+
+  }catch(error){
+
+    console.error(
+      "Admin boot error:",
+      error
+    );
+
+    showBootError(
+      error?.message ||
+      "Unknown error while loading the admin panel."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+async function render(){
+
+  const [
+
+    paymentResult,
+
+    courseResult,
+
+    studentResult,
+
+    moduleResult,
+
+    pricingResult
+
+  ] = await withTimeout(
+    Promise.all([
+
+      S
+        .from("payment_requests")
+        .select("*")
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        ),
+
+
+      S
+        .from("courses")
+        .select("*")
+        .order(
+          "created_at",
+          {
+            ascending:true
+          }
+        ),
+
+
+      S
+        .from("profiles")
+        .select("*")
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        ),
+
+
+      S
+        .from("modules")
+        .select("*")
+        .order(
+          "position",
+          {
+            ascending:true
+          }
+        ),
+
+
+      S
+        .from("plan_pricing")
+        .select(
+          "plan,name,price,compare_at,active"
+        )
+
+    ]),
+    15000,
+    "Admin data loading"
+  );
+
+
+  const queryErrors = [
+    ["Payment requests", paymentResult?.error],
+    ["Courses", courseResult?.error],
+    ["Students", studentResult?.error],
+    ["Curriculum", moduleResult?.error],
+    ["Pricing", pricingResult?.error]
+  ].filter(item => item[1]);
+
+
+  if(queryErrors.length){
+
+    throw new Error(
+      queryErrors
+        .map(item => item[0] + ": " + item[1].message)
+        .join("\n")
+    );
+
+  }
+
+
+  const payments =
+    paymentResult.data || [];
+
+
+  const courses =
+    courseResult.data || [];
+
+
+  const students =
+    studentResult.data || [];
+
+
+  const modules =
+    moduleResult.data || [];
+
+
+  PRICING =
+    pricingResult.data || [];
+
+
+  const pending =
+    payments.filter(
+      x =>
+        x.status === "pending"
+    ).length;
+
+
+  document.getElementById(
+    "app"
+  ).innerHTML = `
+
+
+    <!-- ===================================================
+         OVERVIEW
+    ==================================================== -->
+
+    <section id="overview">
+
+      <div class="dash-top">
+
+        <div>
+
+          <span class="tag">
+            Admin control center
+          </span>
+
+          <h1>
+            Good to see you.
+          </h1>
+
+          <p class="muted">
+            Manage payments, curriculum, pricing and students.
+          </p>
+
+        </div>
+
+
+        <div class="actions">
+
+          <a
+            class="btn"
+            href="index.html"
+          >
+            View Site ↗
+          </a>
+
+
+          <button
+            class="btn btn-dark"
+            type="button"
+            onclick="signOut()"
+          >
+            Logout
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="stat-grid">
+
+        <div class="stat">
+
+          <span class="muted">
+            Payment requests
+          </span>
+
+          <b>
+            ${payments.length}
+          </b>
+
+        </div>
+
+
+        <div class="stat">
+
+          <span class="muted">
+            Pending
+          </span>
+
+          <b>
+            ${pending}
+          </b>
+
+        </div>
+
+
+        <div class="stat">
+
+          <span class="muted">
+            Curriculum modules
+          </span>
+
+          <b>
+            ${modules.length}
+          </b>
+
+        </div>
+
+
+        <div class="stat">
+
+          <span class="muted">
+            Students
+          </span>
+
+          <b>
+            ${students.length}
+          </b>
+
+        </div>
+
+      </div>
+
+
+      <div class="separate-product">
+
+        <span class="product-badge">
+          Separate product
+        </span>
+
+        <h3>
+          Premium Telegram Renewal — ₹699
+        </h3>
+
+        <p class="small muted">
+          Completely separate from the NIFTY trading course.
+          Approval creates a separate enrollment for this product.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         PAYMENTS
+    ==================================================== -->
+
+    <section
+      id="payments"
+      class="admin-section"
+    >
+
+      <span class="tag">
+        Payments
+      </span>
+
+      <h2>
+        Payment Requests
+      </h2>
+
+      <p class="muted">
+        Verify the actual incoming UPI/bank transaction and exact amount before approving.
+      </p>
+
+
+      <div
+        class="notice warn"
+        style="margin:16px 0"
+      >
+
+        UTR text alone is not payment proof.
+        Approve only after checking the actual transaction.
+
+      </div>
+
+
+      <div class="card">
+
+        ${
+          payments.length
+
+          ?
+
+          payments.map(
+            payment => {
+
+              let planName =
+                payment.plan;
+
+
+              const priceRow =
+                PRICING.find(
+                  row =>
+                    row.plan ===
+                    payment.plan
+                );
+
+
+              if(priceRow){
+
+                planName =
+                  priceRow.name;
+
+              }else if(
+                payment.plan ===
+                "basic"
+              ){
+
+                planName =
+                  "Basic — ₹1,499";
+
+              }else if(
+                payment.plan ===
+                "premium"
+              ){
+
+                planName =
+                  "Premium — ₹2,499";
+
+              }else if(
+                payment.plan ===
+                "renewal"
+              ){
+
+                planName =
+                  "Premium Telegram Renewal — ₹699";
+
+              }
+
+
+              const statusClass =
+                payment.status === "approved"
+
+                  ? "status-approved"
+
+                  : payment.status === "rejected"
+
+                    ? "status-rejected"
+
+                    : "status-pending";
+
+
+              return `
+
+                <div class="payment-row">
+
+                  <div class="payment-main">
+
+                    <div class="payment-email">
+
+                      ${esc(
+                        payment.email ||
+                        "No email"
+                      )}
+
+                    </div>
+
+
+                    <div class="payment-meta">
+
+                      <b>
+                        ${esc(
+                          planName
+                        )}
+                      </b>
+
+                      <br>
+
+                      Amount:
+                      ₹${Number(
+                        payment.amount ||
+                        0
+                      ).toLocaleString(
+                        "en-IN"
+                      )}
+
+                      <br>
+
+                      UTR:
+                      <strong>
+                        ${esc(
+                          payment.utr ||
+                          "—"
+                        )}
+                      </strong>
+
+                      <br>
+
+                      Paid:
+                      ${safeDate(
+                        payment.paid_at
+                      )}
+
+                    </div>
+
+
+                    <div style="margin-top:8px">
+
+                      <span
+                        class="status-pill ${statusClass}"
+                      >
+
+                        ${esc(
+                          payment.status
+                        )}
+
+                      </span>
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="payment-actions">
+
+                    ${
+                      payment.status ===
+                      "pending"
+
+                      ?
+
+                      `
+
+                        <button
+                          class="btn btn-dark"
+                          type="button"
+                          onclick="requestApprove(
+                            '${esc(payment.id)}',
+                            '${esc(payment.user_id)}',
+                            '${esc(payment.plan)}',
+                            ${Number(payment.amount || 0)}
+                          )"
+                        >
+                          Approve
+                        </button>
+
+
+                        <button
+                          class="btn"
+                          type="button"
+                          onclick="requestReject(
+                            '${esc(payment.id)}'
+                          )"
+                        >
+                          Reject
+                        </button>
+
+                      `
+
+                      :
+
+                      "—"
+
+                    }
+
+                  </div>
+
+                </div>
+
+              `;
+
+            }
+          ).join("")
+
+
+          :
+
+          `
+
+            <div class="empty-box">
+
+              <h3>
+                No payment requests
+              </h3>
+
+              <p>
+                New payment requests will appear here.
+              </p>
+
+            </div>
+
+          `
+
+        }
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         CURRICULUM
+    ==================================================== -->
+
+    <section
+      id="curriculum"
+      class="admin-section"
+    >
+
+      <span class="tag">
+        Curriculum
+      </span>
+
+
+      <h2>
+        Manage Curriculum
+      </h2>
+
+
+      <p class="muted">
+        Main NIFTY course ka curriculum manage karo.
+        Course create/manage option intentionally removed.
+      </p>
+
+
+      <div class="grid grid-2">
+
+
+        <!-- ADD MODULE -->
+
+        <div class="card">
+
+          <h3>
+            Add Module
+          </h3>
+
+          <form
+            id="moduleForm"
+            class="form"
+          >
+
+            <div class="field">
+
+              <label>
+                Module title
+              </label>
+
+              <input
+                id="moduleTitle"
+                required
+                placeholder="Example: Market Structure"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Module work / description
+              </label>
+
+              <textarea
+                id="moduleDescription"
+                rows="5"
+                required
+                placeholder="Is module mein kya sikhaya jayega..."
+              ></textarea>
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Position
+              </label>
+
+              <input
+                id="modulePosition"
+                type="number"
+                min="1"
+                value="1"
+                required
+              >
+
+            </div>
+
+
+            <button
+              class="btn btn-blue"
+              type="submit"
+            >
+              Add Module
+            </button>
+
+          </form>
+
+        </div>
+
+
+        <!-- ADD LESSON -->
+
+        <div class="card">
+
+          <h3>
+            Add Lesson
+          </h3>
+
+
+          <form
+            id="lessonForm"
+            class="form"
+          >
+
+            <div class="field">
+
+              <label>
+                Module
+              </label>
+
+              <select
+                id="lessonModule"
+                required
+              >
+
+                <option value="">
+                  Select module
+                </option>
+
+
+                ${
+                  modules.map(
+                    module => `
+
+                      <option
+                        value="${esc(
+                          module.id
+                        )}"
+                      >
+
+                        ${esc(
+                          module.title
+                        )}
+
+                      </option>
+
+                    `
+                  ).join("")
+                }
+
+              </select>
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Lesson title
+              </label>
+
+              <input
+                id="lessonTitle"
+                required
+                placeholder="Example: Identifying a Breakout"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Lesson content
+              </label>
+
+              <textarea
+                id="lessonContent"
+                rows="5"
+                placeholder="Lesson content..."
+              ></textarea>
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Video URL (optional)
+              </label>
+
+              <input
+                id="lessonVideo"
+                type="url"
+                placeholder="https://..."
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Position
+              </label>
+
+              <input
+                id="lessonPosition"
+                type="number"
+                min="1"
+                value="1"
+                required
+              >
+
+            </div>
+
+
+            <button
+              class="btn btn-blue"
+              type="submit"
+            >
+              Add Lesson
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="card"
+        style="margin-top:18px"
+      >
+
+        <span class="tag">
+          Existing Modules
+        </span>
+
+
+        ${
+          modules.length
+
+          ?
+
+          modules.map(
+            module => `
+
+              <div class="module-card">
+
+                <h3 style="margin:0">
+
+                  ${safe(
+                    module.position
+                  )}.
+                  ${safe(
+                    module.title
+                  )}
+
+                </h3>
+
+                <p class="small muted">
+
+                  Module ID:
+                  ${safe(
+                    module.id
+                  )}
+
+                </p>
+
+              </div>
+
+            `
+          ).join("")
+
+
+          :
+
+          `
+
+            <div class="empty-box">
+              No curriculum modules yet.
+            </div>
+
+          `
+
+        }
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         PRICING
+    ==================================================== -->
+
+    <section
+      id="pricing"
+      class="admin-section"
+    >
+
+      <span class="tag">
+        Pricing
+      </span>
+
+
+      <h2>
+        Pricing Management
+      </h2>
+
+
+      <p class="muted">
+        Change selling price and original/compare-at price.
+      </p>
+
+
+      <div
+        class="grid grid-2"
+        style="margin-top:18px"
+      >
+
+        ${
+          [
+            "basic",
+            "premium",
+            "renewal"
+          ]
+
+          .map(
+            plan => {
+
+              const defaults = {
+
+                basic:{
+                  name:
+                    "Basic — Weekly Live Doubt Solving",
+
+                  price:
+                    1499,
+
+                  compare_at:
+                    1799
+
+                },
+
+
+                premium:{
+                  name:
+                    "Premium — Daily Live Doubt Solving + Mentorship",
+
+                  price:
+                    2499,
+
+                  compare_at:
+                    3499
+
+                },
+
+
+                renewal:{
+                  name:
+                    "Premium Telegram Renewal",
+
+                  price:
+                    699,
+
+                  compare_at:
+                    799
+
+                }
+
+              };
+
+
+              const row =
+                PRICING.find(
+                  x =>
+                    x.plan ===
+                    plan
+                ) ||
+                {
+
+                  plan:
+                    plan,
+
+                  name:
+                    defaults[
+                      plan
+                    ].name,
+
+                  price:
+                    defaults[
+                      plan
+                    ].price,
+
+                  compare_at:
+                    defaults[
+                      plan
+                    ].compare_at,
+
+                  active:
+                    true
+
+                };
+
+
+              return `
+
+                <div class="pricing-card">
+
+                  <span class="tag">
+                    ${safe(
+                      plan.toUpperCase()
+                    )}
+                  </span>
+
+
+                  <h3>
+                    ${safe(
+                      row.name
+                    )}
+                  </h3>
+
+
+                  <div
+                    class="price-grid"
+                    style="margin-top:16px"
+                  >
+
+                    <div class="field">
+
+                      <label>
+                        Selling Price ₹
+                      </label>
+
+                      <input
+                        class="price-input"
+                        data-plan="${plan}"
+                        data-field="price"
+                        type="number"
+                        min="0"
+                        value="${Number(
+                          row.price
+                        )}"
+                      >
+
+                    </div>
+
+
+                    <div class="field">
+
+                      <label>
+                        Original Price ₹
+                      </label>
+
+                      <input
+                        class="price-input"
+                        data-plan="${plan}"
+                        data-field="compare_at"
+                        type="number"
+                        min="0"
+                        value="${Number(
+                          row.compare_at
+                        )}"
+                      >
+
+                    </div>
+
+                  </div>
+
+
+                  <label
+                    style="
+                      display:flex;
+                      gap:8px;
+                      align-items:center;
+                      margin-top:12px;
+                      font-weight:750;
+                    "
+                  >
+
+                    <input
+                      class="price-active"
+                      data-plan="${plan}"
+                      type="checkbox"
+                      ${
+                        row.active
+                          ? "checked"
+                          : ""
+                      }
+                    >
+
+                    Active
+
+                  </label>
+
+
+                  ${
+                    plan ===
+                    "renewal"
+
+                    ?
+
+                    `
+
+                      <div class="separate-product">
+
+                        <b>
+                          Separate Product
+                        </b>
+
+                        <p
+                          class="small muted"
+                          style="margin-bottom:0"
+                        >
+                          ₹699 renewal has its own
+                          course/product record.
+                          It is not tied to the NIFTY Premium enrollment.
+                        </p>
+
+                      </div>
+
+                    `
+
+                    :
+
+                    ""
+
+                  }
+
+                </div>
+
+              `;
+
+            }
+          ).join("")
+
+        }
+
+      </div>
+
+
+      <div
+        class="card"
+        style="margin-top:16px"
+      >
+
+        <button
+          id="savePricingBtn"
+          class="btn btn-blue"
+          type="button"
+        >
+          Save Pricing
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         STUDENTS
+    ==================================================== -->
+
+    <section
+      id="students"
+      class="admin-section"
+    >
+
+      <span class="tag">
+        Students
+      </span>
+
+
+      <h2>
+        Registered Students
+      </h2>
+
+
+      <div class="table-wrap">
+
+        <table class="table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Name
+              </th>
+
+              <th>
+                Email
+              </th>
+
+              <th>
+                Age
+              </th>
+
+              <th>
+                WhatsApp
+              </th>
+
+              <th>
+                Telegram
+              </th>
+
+              <th>
+                Joined
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            ${
+              students.length
+
+              ?
+
+              students.map(
+                student => `
+
+                  <tr>
+
+                    <td>
+                      <b>
+                        ${safe(
+                          student.full_name ||
+                          "—"
+                        )}
+                      </b>
+                    </td>
+
+                    <td>
+                      ${safe(
+                        student.email ||
+                        "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${safe(
+                        student.age ||
+                        "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${safe(
+                        student.phone ||
+                        "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${safe(
+                        student.telegram_username ||
+                        "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${safeDate(
+                        student.created_at
+                      )}
+                    </td>
+
+                  </tr>
+
+                `
+              ).join("")
+
+
+              :
+
+              `
+
+                <tr>
+
+                  <td
+                    colspan="6"
+                    class="empty"
+                  >
+                    No students yet.
+                  </td>
+
+                </tr>
+
+              `
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         SETTINGS
+    ==================================================== -->
+
+    <section
+      id="settings"
+      class="admin-section"
+    >
+
+      <span class="tag">
+        Settings
+      </span>
+
+
+      <h2>
+        Control Center Settings
+      </h2>
+
+
+      <div class="grid grid-2">
+
+
+        <div class="card">
+
+          <h3>
+            Payment Settings
+          </h3>
+
+
+          <p>
+            <b>
+              UPI:
+            </b>
+
+            ${safe(
+              SRTX_CONFIG.UPI_ID
+            )}
+
+          </p>
+
+
+          <p>
+            <b>
+              Support:
+            </b>
+
+            ${safe(
+              SRTX_CONFIG.SUPPORT_PHONE
+            )}
+
+          </p>
+
+
+          <p>
+            <b>
+              Basic:
+            </b>
+
+            ₹1,499
+          </p>
+
+
+          <p>
+            <b>
+              Premium:
+            </b>
+
+            ₹2,499
+          </p>
+
+
+          <p>
+            <b>
+              Telegram Renewal:
+            </b>
+
+            ₹699
+          </p>
+
+
+          <p class="small muted">
+
+            ₹699 is a separate Premium Telegram
+            renewal product.
+
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>
+            Change Admin Password
+          </h3>
+
+
+          <form
+            id="passwordForm"
+            class="form"
+          >
+
+            <div class="field">
+
+              <label>
+                New password
+              </label>
+
+              <input
+                id="newPassword"
+                type="password"
+                minlength="8"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Confirm password
+              </label>
+
+              <input
+                id="confirmPassword"
+                type="password"
+                minlength="8"
+                required
+              >
+
+            </div>
+
+
+            <button
+              class="btn btn-dark"
+              type="submit"
+            >
+              Update Password
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  `;
+
+
+  /* EVENTS */
+
+
+  document
+    .getElementById(
+      "moduleForm"
+    )
+    .addEventListener(
+      "submit",
+      addModule
+    );
+
+
+  document
+    .getElementById(
+      "lessonForm"
+    )
+    .addEventListener(
+      "submit",
+      addLesson
+    );
+
+
+  document
+    .getElementById(
+      "savePricingBtn"
+    )
+    .addEventListener(
+      "click",
+      savePricing
+    );
+
+
+  document
+    .getElementById(
+      "passwordForm"
+    )
+    .addEventListener(
+      "submit",
+      changePassword
+    );
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function safeDate(
+  value
+){
+
+  if(!value){
+
+    return "—";
+
+  }
+
+
+  const date =
+    new Date(
+      value
+    );
+
+
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+
+    return "—";
+
+  }
+
+
+  return date.toLocaleDateString(
+    "en-IN"
+  );
+
+}
+
+
+/* =========================================================
+   REQUEST APPROVE
+========================================================= */
+
+async function requestApprove(
+  id,
+  userId,
+  plan,
+  amount
+){
+
+  try{
+
+    const cleanPlan =
+      String(
+        plan || ""
+      )
+      .trim()
+      .toLowerCase();
+
+
+    const pricing =
+      PRICING.find(
+        row =>
+          row.plan ===
+          cleanPlan
+      );
+
+
+    let expected;
+
+
+    if(pricing){
+
+      expected =
+        Number(
+          pricing.price
+        );
+
+    }else{
+
+      expected = {
+
+        basic:
+          1499,
+
+        premium:
+          2499,
+
+        renewal:
+          699
+
+      }[
+        cleanPlan
+      ];
+
+    }
+
+
+    if(
+      !Number.isFinite(
+        expected
+      )
+    ){
+
+      showMessage(
+        "error",
+        "Unknown payment plan: " +
+        cleanPlan
+      );
+
+      return;
+
+    }
+
+
+    if(
+      Number(amount) !==
+      expected
+    ){
+
+      showMessage(
+        "error",
+        "Plan amount mismatch. Expected ₹" +
+        expected.toLocaleString(
+          "en-IN"
+        ) +
+        " but payment request is ₹" +
+        Number(
+          amount
+        ).toLocaleString(
+          "en-IN"
+        ) +
+        "."
+      );
+
+      return;
+
+    }
+
+
+    /*
+      IMPORTANT:
+      Renewal does NOT check Premium enrollment.
+      It is a completely separate product.
+    */
+
+    const message =
+      cleanPlan === "renewal"
+
+        ?
+
+        "Verify the actual ₹699 UPI/bank transaction. This will create/activate the student's separate Premium Telegram Renewal product. It will NOT modify the NIFTY Premium course."
+
+        :
+
+        "Verify the actual UPI/bank transaction and exact amount before approving this NIFTY course payment.";
+
+
+    openConfirm(
+
+      "Approve Payment",
+
+      message,
+
+      "Approve",
+
+      false,
+
+      async function(){
+
+        await approvePayment(
+          id,
+          userId,
+          cleanPlan,
+          amount
+        );
+
+      }
+
+    );
+
+
+  }catch(error){
+
+    showMessage(
+      "error",
+      error.message ||
+      "Could not start approval."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   APPROVE PAYMENT
+========================================================= */
+
+async function approvePayment(
+  id,
+  userId,
+  plan,
+  amount
+){
+
+  try{
+
+    /*
+      ==========================================
+      BASIC
+      ==========================================
+      Main NIFTY course.
+    */
+
+    if(
+      plan ===
+      "basic"
+    ){
+
+      const course =
+        await getOrCreateProduct(
+          NIFTY_COURSE
+        );
+
+
+      const payment =
+        await approvePaymentRequest(
+          id
+        );
+
+
+      if(payment.error){
+
+        showMessage(
+          "error",
+          payment.error.message
+        );
+
+        return;
+
+      }
+
+
+      const enrollment =
+        await S
+
+          .from("enrollments")
+
+          .upsert({
+
+            user_id:
+              userId,
+
+            course_id:
+              course.id,
+
+            plan:
+              "basic",
+
+            status:
+              "active",
+
+            amount_paid:
+              Number(amount),
+
+            payment_request_id:
+              id
+
+          },{
+            onConflict:
+              "user_id,course_id"
+          });
+
+
+      if(enrollment.error){
+
+        await rollbackPayment(
+          id
+        );
+
+
+        showMessage(
+          "error",
+          "Enrollment failed: " +
+          enrollment.error.message
+        );
+
+        return;
+
+      }
+
+
+      showMessage(
+        "success",
+        "Basic payment approved. NIFTY Basic access is active."
+      );
+
+
+      await render();
+
+      return;
+
+    }
+
+
+    /*
+      ==========================================
+      PREMIUM
+      ==========================================
+      Main NIFTY course.
+    */
+
+    if(
+      plan ===
+      "premium"
+    ){
+
+      const course =
+        await getOrCreateProduct(
+          NIFTY_COURSE
+        );
+
+
+      const payment =
+        await approvePaymentRequest(
+          id
+        );
+
+
+      if(payment.error){
+
+        showMessage(
+          "error",
+          payment.error.message
+        );
+
+        return;
+
+      }
+
+
+      const enrollment =
+        await S
+
+          .from("enrollments")
+
+          .upsert({
+
+            user_id:
+              userId,
+
+            course_id:
+              course.id,
+
+            plan:
+              "premium",
+
+            status:
+              "active",
+
+            amount_paid:
+              Number(amount),
+
+            payment_request_id:
+              id
+
+          },{
+            onConflict:
+              "user_id,course_id"
+          });
+
+
+      if(enrollment.error){
+
+        await rollbackPayment(
+          id
+        );
+
+
+        showMessage(
+          "error",
+          "Premium enrollment failed: " +
+          enrollment.error.message
+        );
+
+        return;
+
+      }
+
+
+      showMessage(
+        "success",
+        "Premium payment approved. NIFTY Premium access is active."
+      );
+
+
+      await render();
+
+      return;
+
+    }
+
+
+    /*
+      ==========================================
+      RENEWAL
+      ==========================================
+
+      THIS IS THE IMPORTANT FIX.
+
+      There is:
+      - NO NIFTY course lookup
+      - NO Premium enrollment lookup
+      - NO downgrade logic
+      - NO modification of NIFTY enrollment
+
+      It gets its OWN course/product.
+    */
+
+    if(
+      plan ===
+      "renewal"
+    ){
+
+      const renewalCourse =
+        await getOrCreateProduct(
+          TELEGRAM_RENEWAL
+        );
+
+
+      const payment =
+        await approvePaymentRequest(
+          id
+        );
+
+
+      if(payment.error){
+
+        showMessage(
+          "error",
+          payment.error.message
+        );
+
+        return;
+
+      }
+
+
+      const renewalEnrollment =
+        await S
+
+          .from("enrollments")
+
+          .upsert({
+
+            user_id:
+              userId,
+
+            course_id:
+              renewalCourse.id,
+
+            plan:
+              "renewal",
+
+            status:
+              "active",
+
+            amount_paid:
+              Number(amount),
+
+            payment_request_id:
+              id
+
+          },{
+            onConflict:
+              "user_id,course_id"
+          });
+
+
+      if(
+        renewalEnrollment.error
+      ){
+
+        await rollbackPayment(
+          id
+        );
+
+
+        showMessage(
+          "error",
+          "Renewal enrollment failed: " +
+          renewalEnrollment.error.message
+        );
+
+        return;
+
+      }
+
+
+      showMessage(
+        "success",
+        "₹699 Premium Telegram Renewal approved. It is completely separate from the NIFTY course."
+      );
+
+
+      await render();
+
+      return;
+
+    }
+
+
+    showMessage(
+      "error",
+      "Unsupported payment plan: " +
+      plan
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "approvePayment error:",
+      error
+    );
+
+
+    showMessage(
+      "error",
+      error.message ||
+      "Something went wrong while approving the payment."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   APPROVE PAYMENT REQUEST
+========================================================= */
+
+async function approvePaymentRequest(
+  id
+){
+
+  return await S
+
+    .from(
+      "payment_requests"
+    )
+
+    .update({
+
+      status:
+        "approved",
+
+      approved_by:
+        ME.id,
+
+      approved_at:
+        new Date().toISOString()
+
+    })
+
+    .eq(
+      "id",
+      id
+    )
+
+    .eq(
+      "status",
+      "pending"
+    );
+
+}
+
+
+/* =========================================================
+   ROLLBACK
+========================================================= */
+
+async function rollbackPayment(
+  id
+){
+
+  await S
+
+    .from(
+      "payment_requests"
+    )
+
+    .update({
+
+      status:
+        "pending",
+
+      approved_by:
+        null,
+
+      approved_at:
+        null
+
+    })
+
+    .eq(
+      "id",
+      id
+    );
+
+}
+
+
+/* =========================================================
+   REJECT REQUEST
+========================================================= */
+
+function requestReject(
+  id
+){
+
+  openConfirm(
+
+    "Reject Payment",
+
+    "Are you sure you want to reject this payment request?",
+
+    "Reject Payment",
+
+    true,
+
+    async function(){
+
+      await rejectPayment(
+        id
+      );
+
+    }
+
+  );
+
+}
+
+
+async function rejectPayment(
+  id
+){
+
+  const result =
+    await S
+
+      .from(
+        "payment_requests"
+      )
+
+      .update({
+
+        status:
+          "rejected",
+
+        approved_by:
+          ME.id,
+
+        approved_at:
+          new Date().toISOString()
+
+      })
+
+      .eq(
+        "id",
+        id
+      )
+
+      .eq(
+        "status",
+        "pending"
+      );
+
+
+  if(result.error){
+
+    showMessage(
+      "error",
+      result.error.message
+    );
+
+    return;
+
+  }
+
+
+  showMessage(
+    "success",
+    "Payment request rejected."
+  );
+
+
+  await render();
+
+}
+
+
+/* =========================================================
+   SAVE PRICING
+========================================================= */
+
+async function savePricing(){
+
+  const button =
+    document.getElementById(
+      "savePricingBtn"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Saving…";
+
+
+  try{
+
+    const plans = [
+      "basic",
+      "premium",
+      "renewal"
+    ];
+
+
+    for(
+      const plan of plans
+    ){
+
+      const price =
+        Number(
+          document.querySelector(
+            `.price-input[data-plan="${plan}"][data-field="price"]`
+          ).value
+        );
+
+
+      const compareAt =
+        Number(
+          document.querySelector(
+            `.price-input[data-plan="${plan}"][data-field="compare_at"]`
+          ).value
+        );
+
+
+      const active =
+        document.querySelector(
+          `.price-active[data-plan="${plan}"]`
+        ).checked;
+
+
+      if(
+        !Number.isFinite(
+          price
+        ) ||
+        price < 0
+      ){
+
+        throw new Error(
+          plan +
+          " selling price is invalid."
+        );
+
+      }
+
+
+      if(
+        !Number.isFinite(
+          compareAt
+        ) ||
+        compareAt < 0
+      ){
+
+        throw new Error(
+          plan +
+          " original price is invalid."
+        );
+
+      }
+
+
+      if(
+        compareAt > 0 &&
+        compareAt < price
+      ){
+
+        throw new Error(
+          plan +
+          " original price cannot be lower than selling price."
+        );
+
+      }
+
+
+      const existing =
+        PRICING.find(
+          row =>
+            row.plan ===
+            plan
+        );
+
+
+      const names = {
+
+        basic:
+          "Basic — Weekly Live Doubt Solving",
+
+        premium:
+          "Premium — Daily Live Doubt Solving + Mentorship",
+
+        renewal:
+          "Premium Telegram Renewal"
+
+      };
+
+
+      const result =
+        await S
+
+          .from(
+            "plan_pricing"
+          )
+
+          .upsert({
+
+            plan:
+              plan,
+
+            name:
+              existing?.name ||
+              names[plan],
+
+            price:
+              price,
+
+            compare_at:
+              compareAt,
+
+            active:
+              active,
+
+            updated_at:
+              new Date().toISOString()
+
+          },{
+            onConflict:
+              "plan"
+          });
+
+
+      if(result.error){
+
+        throw new Error(
+          result.error.message
+        );
+
+      }
+
+    }
+
+
+    showMessage(
+      "success",
+      "Pricing updated successfully."
+    );
+
+
+    await render();
+
+
+  }catch(error){
+
+    showMessage(
+      "error",
+      "Pricing update failed: " +
+      (
+        error.message ||
+        "Unknown error"
+      )
+    );
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      "Save Pricing";
+
+  }
+
+}
+
+
+/* =========================================================
+   ADD MODULE
+========================================================= */
+
+async function addModule(
+  e
+){
+
+  e.preventDefault();
+
+
+  const title =
+    document
+      .getElementById(
+        "moduleTitle"
+      )
+      .value
+      .trim();
+
+
+  const description =
+    document
+      .getElementById(
+        "moduleDescription"
+      )
+      .value
+      .trim();
+
+
+  const position =
+    Number(
+      document
+        .getElementById(
+          "modulePosition"
+        )
+        .value
+    );
+
+
+  if(
+    !title ||
+    !description
+  ){
+
+    showMessage(
+      "error",
+      "Module title and description are required."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const course =
+      await getOrCreateProduct(
+        NIFTY_COURSE
+      );
+
+
+    const moduleResult =
+      await S
+
+        .from(
+          "modules"
+        )
+
+        .insert({
+
+          course_id:
+            course.id,
+
+          title:
+            title,
+
+          position:
+            position
+
+        })
+
+        .select()
+        .single();
+
+
+    if(moduleResult.error){
+
+      showMessage(
+        "error",
+        moduleResult.error.message
+      );
+
+      return;
+
+    }
+
+
+    /*
+      Existing schema uses lessons for content,
+      so module description is stored as overview lesson.
+    */
+
+    const lessonResult =
+      await S
+
+        .from(
+          "lessons"
+        )
+
+        .insert({
+
+          module_id:
+            moduleResult.data.id,
+
+          title:
+            "Module Overview",
+
+          content:
+            description,
+
+          position:
+            1
+
+        });
+
+
+    if(lessonResult.error){
+
+      showMessage(
+        "error",
+        "Module created but overview could not be saved: " +
+        lessonResult.error.message
+      );
+
+      return;
+
+    }
+
+
+    showMessage(
+      "success",
+      "Module added successfully."
+    );
+
+
+    await render();
+
+
+  }catch(error){
+
+    showMessage(
+      "error",
+      error.message ||
+      "Could not add module."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   ADD LESSON
+========================================================= */
+
+async function addLesson(
+  e
+){
+
+  e.preventDefault();
+
+
+  const moduleId =
+    document
+      .getElementById(
+        "lessonModule"
+      )
+      .value;
+
+
+  const title =
+    document
+      .getElementById(
+        "lessonTitle"
+      )
+      .value
+      .trim();
+
+
+  const content =
+    document
+      .getElementById(
+        "lessonContent"
+      )
+      .value
+      .trim();
+
+
+  const video =
+    document
+      .getElementById(
+        "lessonVideo"
+      )
+      .value
+      .trim();
+
+
+  const position =
+    Number(
+      document
+        .getElementById(
+          "lessonPosition"
+        )
+        .value
+    );
+
+
+  if(
+    !moduleId ||
+    !title
+  ){
+
+    showMessage(
+      "error",
+      "Select a module and enter lesson title."
+    );
+
+    return;
+
+  }
+
+
+  const result =
+    await S
+
+      .from(
+        "lessons"
+      )
+
+      .insert({
+
+        module_id:
+          moduleId,
+
+        title:
+          title,
+
+        content:
+          content,
+
+        video_url:
+          video ||
+          null,
+
+        position:
+          position
+
+      });
+
+
+  if(result.error){
+
+    showMessage(
+      "error",
+      result.error.message
+    );
+
+    return;
+
+  }
+
+
+  showMessage(
+    "success",
+    "Lesson added successfully."
+  );
+
+
+  await render();
+
+}
+
+
+/* =========================================================
+   CHANGE PASSWORD
+========================================================= */
+
+async function changePassword(
+  e
+){
+
+  e.preventDefault();
+
+
+  const password =
+    document
+      .getElementById(
+        "newPassword"
+      )
+      .value;
+
+
+  const confirm =
+    document
+      .getElementById(
+        "confirmPassword"
+      )
+      .value;
+
+
+  if(
+    password !==
+    confirm
+  ){
+
+    showMessage(
+      "error",
+      "Passwords do not match."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    password.length <
+    8
+  ){
+
+    showMessage(
+      "error",
+      "Password must be at least 8 characters."
+    );
+
+    return;
+
+  }
+
+
+  const result =
+    await S.auth.updateUser({
+
+      password:
+        password
+
+    });
+
+
+  if(result.error){
+
+    showMessage(
+      "error",
+      result.error.message
+    );
+
+    return;
+
+  }
+
+
+  e.target.reset();
+
+
+  showMessage(
+    "success",
+    "Admin password updated successfully."
+  );
+
+}
+
+
+/* =========================================================
+   GLOBAL ERROR HANDLER
+========================================================= */
+
+window.addEventListener("unhandledrejection", function(event){
+
+  console.error(
+    "Unhandled admin promise:",
+    event.reason
+  );
+
+  if(
+    document
+      .getElementById("app")
+      ?.textContent
+      ?.includes("Loading admin")
+  ){
+
+    showBootError(
+      event.reason?.message ||
+      "An unexpected Supabase error occurred."
+    );
+
+  }
+
+});
+
+
+/* =========================================================
+   START
+========================================================= */
+
+boot();
+
+</script>
+
+</body>
+
+</html>
