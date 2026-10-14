@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apply — SURAJTRADERX</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/jpeg" href="assets/srtx-logo.jpg">
+</head>
+
+<body data-page="apply">
+
+<div class="topbar">
+  Educational platform • Trading involves risk • No profit guarantees
+</div>
+
+<header class="nav">
+  <div class="container nav-inner">
+
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="assets/srtx-logo.jpg" alt="SURAJTRADERX logo">
+      <span>SURAJTRADERX</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="curriculum.html">Curriculum</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="apply.html">Apply</a>
+      <a href="payment.html">Payment</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a class="nav-cta" href="login.html">Student Login</a>
+    </nav>
+
+    <button class="hamb" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+  <div class="container mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="apply.html">Apply</a>
+    <a href="payment.html">Payment</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html">Student Login</a>
+  </div>
+</header>
+
+<main>
+<section class="section">
+<div class="container grid grid-2">
+
+  <div>
+    <span class="tag">Enrollment</span>
+
+    <h1>Apply for your plan.</h1>
+
+    <p class="lead">
+      Create your student account, select your plan and continue to secure UPI payment.
+    </p>
+
+    <div class="card soft" style="margin-top:22px">
+      <h3>Support included</h3>
+      <p class="muted">
+        Basic ₹1,499 → Weekly live doubt solving.
+      </p>
+      <p class="muted">
+        Premium ₹2,499 → Daily live doubt solving + mentorship.
+      </p>
+      <p class="muted">
+        Renewal ₹699/month → Premium Telegram continuation.
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <form id="applyForm" class="form">
+
+      <div class="field">
+        <label>Full name</label>
+        <input id="name" type="text" required>
+      </div>
+
+      <div class="field">
+        <label>Age</label>
+        <input id="age" type="number" min="13" max="100" required>
+      </div>
+
+      <div class="field">
+        <label>WhatsApp number</label>
+        <input id="phone" type="tel" required>
+      </div>
+
+      <div class="field">
+        <label>Telegram username</label>
+        <input id="telegram" type="text" placeholder="@username">
+      </div>
+
+      <div class="field">
+        <label>Email address</label>
+        <input id="email" type="email" required>
+      </div>
+
+      <div class="field">
+        <label>Create password</label>
+        <input
+          id="password"
+          type="password"
+          minlength="6"
+          required
+          placeholder="Minimum 6 characters"
+        >
+      </div>
+
+      <div class="field">
+        <label>Confirm password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          minlength="6"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label>Select plan</label>
+
+        <select id="plan" required>
+          <option value="basic">
+            Basic — ₹1,499 — Weekly live doubt solving
+          </option>
+
+          <option value="premium">
+            Premium — ₹2,499 — Daily live doubt solving + mentorship
+          </option>
+
+          <option value="renewal">
+            Renewal — ₹699/month
+          </option>
+        </select>
+      </div>
+
+      <div class="checks">
+
+        <label>
+          <input type="checkbox" required>
+          I understand trading involves financial risk.
+        </label>
+
+        <label>
+          <input type="checkbox" required>
+          I understand the course does not guarantee profits.
+        </label>
+
+        <label>
+          <input type="checkbox" required>
+          I have reviewed the selected plan and price.
+        </label>
+
+      </div>
+
+      <button
+        class="btn btn-dark"
+        id="submitBtn"
+        type="submit"
+      >
+        Create Account & Continue →
+      </button>
+
+      <div id="msg" class="small"></div>
+
+    </form>
+
+  </div>
+
+</div>
+</section>
+</main>
+
+<div data-footer></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="supabase.js"></script>
+
+<script>
+
+const params = new URLSearchParams(location.search);
+
+if(params.get("plan")){
+  document.getElementById("plan").value = params.get("plan");
+}
+
+const form = document.getElementById("applyForm");
+const msg = document.getElementById("msg");
+const submitBtn = document.getElementById("submitBtn");
+
+form.addEventListener("submit", async function(e){
+
+  e.preventDefault();
+
+  msg.textContent = "";
+  msg.className = "small";
+
+  const fullName = document.getElementById("name").value.trim();
+  const userAge = document.getElementById("age").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const telegram = document.getElementById("telegram").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+  const selectedPlan = document.getElementById("plan").value;
+
+  if(password !== confirmPassword){
+
+    msg.innerHTML =
+      '<span class="error">Passwords do not match.</span>';
+
+    return;
+  }
+
+  if(password.length < 6){
+
+    msg.innerHTML =
+      '<span class="error">Password must be at least 6 characters.</span>';
+
+    return;
+  }
+
+  const S = await initSB();
+
+  if(!S){
+
+    msg.innerHTML =
+      '<span class="error">Supabase is not configured correctly.</span>';
+
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Creating Account…";
+
+  try{
+
+    const { data, error } = await S.auth.signUp({
+
+      email: email,
+
+      password: password,
+
+      options: {
+        data: {
+          full_name: fullName,
+          age: userAge,
+          phone: phone,
+          telegram_username: telegram
+        }
+      }
+
+    });
+
+    if(error){
+
+      msg.innerHTML =
+        '<span class="error">' +
+        esc(error.message) +
+        '</span>';
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Create Account & Continue →";
+
+      return;
+    }
+
+    localStorage.setItem(
+      "srtx_application",
+      JSON.stringify({
+        name: fullName,
+        age: userAge,
+        phone: phone,
+        telegram: telegram,
+        email: email,
+        plan: selectedPlan
+      })
+    );
+
+    /*
+      If Supabase returns a session immediately,
+      continue directly to payment.
+    */
+
+    if(data.session){
+
+      location.href =
+        "payment.html?plan=" +
+        encodeURIComponent(selectedPlan);
+
+      return;
+    }
+
+    /*
+      If email confirmation is enabled,
+      user must confirm email first.
+    */
+
+    msg.innerHTML =
+      '<span class="success">' +
+      'Account created successfully. Please check your email and confirm your account, then login to continue.' +
+      '</span>';
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Account Created ✓";
+
+  }catch(err){
+
+    msg.innerHTML =
+      '<span class="error">' +
+      esc(err.message || String(err)) +
+      '</span>';
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Create Account & Continue →";
+  }
+
+});
+
+</script>
+
+</body>
+</html>

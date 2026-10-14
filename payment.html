@@ -1,0 +1,1235 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>Payment — SURAJTRADERX</title>
+
+<link
+  rel="stylesheet"
+  href="style.css"
+>
+
+<link
+  rel="icon"
+  type="image/jpeg"
+  href="assets/srtx-logo.jpg"
+>
+
+<style>
+
+.amount-box{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px 14px;
+  align-items:center;
+}
+
+.amount-box span:first-child{
+  font-size:18px;
+  line-height:1.4;
+}
+
+.amount-box b{
+  font-size:34px;
+  white-space:nowrap;
+}
+
+.amount-box .small{
+  grid-column:1/-1;
+}
+
+.price-current{
+  font-size:34px;
+  font-weight:900;
+  color:#ffffff;
+}
+
+.payment-status{
+  margin-top:14px;
+  padding:14px 16px;
+  border-radius:14px;
+  background:#f4f7ff;
+  line-height:1.5;
+}
+
+.payment-status.success{
+  background:#eefbf3;
+  color:#146c3a;
+}
+
+.payment-status.error{
+  background:#fff1f1;
+  color:#a61b1b;
+}
+
+@media(max-width:600px){
+
+  .amount-box{
+    grid-template-columns:1fr;
+  }
+
+  .amount-box b{
+    font-size:32px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body data-page="payment">
+
+
+<div class="topbar">
+  Educational platform • Trading involves risk • No profit guarantees
+</div>
+
+
+<header class="nav">
+
+<div class="container nav-inner">
+
+<a
+  class="brand"
+  href="index.html"
+>
+
+<img
+  class="brand-logo"
+  src="assets/srtx-logo.jpg"
+  alt="SURAJTRADERX logo"
+>
+
+<span>SURAJTRADERX</span>
+
+</a>
+
+
+<nav class="nav-links">
+
+<a data-nav="home" href="index.html">
+Home
+</a>
+
+<a data-nav="curriculum" href="curriculum.html">
+Curriculum
+</a>
+
+<a data-nav="pricing" href="pricing.html">
+Pricing
+</a>
+
+<a data-nav="apply" href="apply.html">
+Apply
+</a>
+
+<a data-nav="payment" href="payment.html">
+Payment
+</a>
+
+<a data-nav="about" href="about.html">
+About
+</a>
+
+<a data-nav="contact" href="contact.html">
+Contact
+</a>
+
+<a class="nav-cta" href="login.html">
+Student Login
+</a>
+
+</nav>
+
+
+<button
+  class="hamb"
+  aria-label="Open menu"
+  type="button"
+>
+
+<span></span>
+<span></span>
+<span></span>
+
+</button>
+
+</div>
+
+
+<div class="container mobile-menu">
+
+<a href="index.html">Home</a>
+
+<a href="curriculum.html">
+Curriculum
+</a>
+
+<a href="pricing.html">
+Pricing
+</a>
+
+<a href="apply.html">
+Apply
+</a>
+
+<a href="payment.html">
+Payment
+</a>
+
+<a href="about.html">
+About
+</a>
+
+<a href="contact.html">
+Contact
+</a>
+
+<a href="login.html">
+Student Login
+</a>
+
+</div>
+
+</header>
+
+
+<main>
+
+<section class="section">
+
+<div class="container">
+
+
+<span class="tag">
+Secure UPI Payment
+</span>
+
+
+<h1>
+Complete your enrollment.
+</h1>
+
+
+<p class="lead">
+
+Pay the exact plan amount to the official UPI ID,
+then submit your UTR. Course access is unlocked only
+after admin verification.
+
+</p>
+
+
+<div
+  class="payment-grid"
+  style="margin-top:28px"
+>
+
+
+<!-- PAYMENT CARD -->
+
+<div class="card">
+
+<span class="tag">
+Step 01
+</span>
+
+
+<h2>
+Pay by UPI
+</h2>
+
+
+<img
+  class="qr"
+  src="assets/payment-qr.png"
+  alt="SURAJTRADERX UPI QR"
+>
+
+
+<div class="notice">
+
+<div class="small muted">
+Official UPI ID
+</div>
+
+
+<div class="upi">
+9421460322@ybl
+</div>
+
+
+<button
+  class="btn"
+  style="margin-top:12px"
+  id="copyUpi"
+  type="button"
+>
+
+Copy UPI ID
+
+</button>
+
+</div>
+
+
+<div class="actions">
+
+<a
+  class="btn btn-blue"
+  id="upiPay"
+  href="#"
+>
+
+Pay via UPI ↗
+
+</a>
+
+</div>
+
+
+<p class="small muted">
+
+Confirm the UPI ID and amount before paying.
+
+Never share your UPI PIN or OTP.
+
+</p>
+
+</div>
+
+
+<!-- UTR CARD -->
+
+<div class="card">
+
+<span class="tag">
+Step 02
+</span>
+
+
+<h2>
+Submit UTR
+</h2>
+
+
+<div class="amount-box">
+
+<span id="planName">
+Basic — Weekly Live Doubt Solving
+</span>
+
+
+<b>
+
+<span
+  id="currentAmount"
+  class="price-current"
+>
+₹1,499
+</span>
+
+</b>
+
+
+<span class="small">
+Exact amount required
+</span>
+
+</div>
+
+
+<form
+  id="paymentForm"
+  class="form"
+  style="margin-top:18px"
+>
+
+
+<div class="field">
+
+<label>
+Email used for enrollment
+</label>
+
+<input
+  id="payEmail"
+  type="email"
+  readonly
+  required
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Plan
+</label>
+
+
+<select
+  id="payPlan"
+  required
+>
+
+<option value="basic">
+Basic — ₹1,499
+</option>
+
+<option value="premium">
+Premium — ₹2,499
+</option>
+
+<option value="renewal">
+Premium Renewal — ₹699/month
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+UTR / Transaction ID
+</label>
+
+<input
+  id="utr"
+  type="text"
+  placeholder="Enter 12-digit UTR / transaction ID"
+  maxlength="50"
+  required
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Transaction date
+</label>
+
+<input
+  id="transactionDate"
+  type="date"
+  required
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Paid amount
+</label>
+
+<input
+  id="paidAmount"
+  type="number"
+  min="1"
+  step="0.01"
+  placeholder="Enter amount paid"
+  required
+>
+
+</div>
+
+
+<label class="check">
+
+<input
+  id="paymentConfirm"
+  type="checkbox"
+  required
+>
+
+<span>
+
+I confirm that I have paid the exact amount
+to the official UPI ID and entered the correct UTR.
+
+</span>
+
+</label>
+
+
+<button
+  class="btn btn-dark"
+  type="submit"
+>
+
+Submit Payment for Verification
+
+</button>
+
+
+<div
+  id="paymentMessage"
+  class="payment-status"
+  hidden
+></div>
+
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<div data-footer></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+<script src="app.js"></script>
+
+<script src="supabase.js"></script>
+
+
+<script>
+
+(function(){
+
+"use strict";
+
+
+const fallback = {
+
+  basic:{
+    name:"Basic — Weekly Live Doubt Solving",
+    price:1499
+  },
+
+  premium:{
+    name:"Premium — Daily Live Doubt Solving + Mentorship",
+    price:2499
+  },
+
+  renewal:{
+    name:"Premium Renewal",
+    price:699
+  }
+
+};
+
+
+let PRICING = {};
+
+
+const money = function(number){
+
+  return "₹" +
+    Number(number || 0)
+    .toLocaleString("en-IN");
+
+};
+
+
+function getPlanFromURL(){
+
+  const params =
+    new URLSearchParams(location.search);
+
+  const plan =
+    params.get("plan");
+
+  if(
+    plan === "premium" ||
+    plan === "renewal"
+  ){
+
+    return plan;
+
+  }
+
+  return "basic";
+
+}
+
+
+function updatePaymentUI(plan){
+
+  const row =
+    PRICING[plan] ||
+    fallback[plan];
+
+  if(!row){
+    return;
+  }
+
+
+  const amount =
+    Number(
+      row.price ||
+      fallback[plan].price
+    );
+
+
+  const name =
+    row.name ||
+    fallback[plan].name;
+
+
+  const amountElement =
+    document.getElementById(
+      "currentAmount"
+    );
+
+
+  const planName =
+    document.getElementById(
+      "planName"
+    );
+
+
+  const paidAmount =
+    document.getElementById(
+      "paidAmount"
+    );
+
+
+  const payPlan =
+    document.getElementById(
+      "payPlan"
+    );
+
+
+  const upiPay =
+    document.getElementById(
+      "upiPay"
+    );
+
+
+  if(amountElement){
+
+    amountElement.textContent =
+      money(amount);
+
+  }
+
+
+  if(planName){
+
+    planName.textContent =
+      name;
+
+  }
+
+
+  if(paidAmount){
+
+    paidAmount.value =
+      amount;
+
+  }
+
+
+  if(payPlan){
+
+    payPlan.value =
+      plan;
+
+  }
+
+
+  if(upiPay){
+
+    const upi =
+      "upi://pay" +
+      "?pa=" +
+      encodeURIComponent(
+        SRTX_CONFIG.UPI_ID
+      ) +
+      "&pn=" +
+      encodeURIComponent(
+        SRTX_CONFIG.UPI_NAME
+      ) +
+      "&am=" +
+      encodeURIComponent(
+        amount.toFixed(2)
+      ) +
+      "&cu=INR";
+
+
+    upiPay.href = upi;
+
+  }
+
+}
+
+
+async function loadPricing(){
+
+  try{
+
+    const S =
+      await initSB();
+
+
+    if(!S){
+
+      throw new Error(
+        "Supabase unavailable"
+      );
+
+    }
+
+
+    const result =
+      await S
+      .from("plan_pricing")
+      .select(
+        "plan,name,price,active"
+      )
+      .eq(
+        "active",
+        true
+      );
+
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+
+    (result.data || [])
+    .forEach(function(row){
+
+      PRICING[row.plan] =
+        row;
+
+    });
+
+
+  }catch(error){
+
+    console.warn(
+      "Pricing load failed. Using fallback prices.",
+      error
+    );
+
+  }
+
+
+  updatePaymentUI(
+    getPlanFromURL()
+  );
+
+}
+
+
+const payPlan =
+  document.getElementById(
+    "payPlan"
+  );
+
+
+if(payPlan){
+
+  payPlan.addEventListener(
+    "change",
+    function(){
+
+      updatePaymentUI(
+        payPlan.value
+      );
+
+    }
+  );
+
+}
+
+
+const copyButton =
+  document.getElementById(
+    "copyUpi"
+  );
+
+
+if(copyButton){
+
+  copyButton.addEventListener(
+    "click",
+    async function(){
+
+      try{
+
+        await navigator.clipboard.writeText(
+          SRTX_CONFIG.UPI_ID
+        );
+
+
+        copyButton.textContent =
+          "Copied ✓";
+
+
+        setTimeout(function(){
+
+          copyButton.textContent =
+            "Copy UPI ID";
+
+        },1500);
+
+
+      }catch(error){
+
+        alert(
+          SRTX_CONFIG.UPI_ID
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+const form =
+  document.getElementById(
+    "paymentForm"
+  );
+  async function loadUserEmail(){
+
+  try{
+
+    const user =
+      await requireUser();
+
+
+    if(!user){
+
+      return;
+
+    }
+
+
+    const emailInput =
+      document.getElementById(
+        "payEmail"
+      );
+
+
+    if(emailInput){
+
+      emailInput.value =
+        user.email || "";
+
+    }
+
+
+    /*
+      Important:
+      Keep the email available for the
+      payment submission.
+    */
+
+    window.SRTX_PAYMENT_USER = user;
+
+
+  }catch(error){
+
+    console.warn(
+      "Could not load user.",
+      error
+    );
+
+  }
+
+}
+
+
+if(form){
+
+  form.addEventListener(
+    "submit",
+    async function(event){
+
+      event.preventDefault();
+
+
+      const message =
+        document.getElementById(
+          "paymentMessage"
+        );
+
+
+      message.className =
+        "payment-status";
+
+
+      message.hidden = false;
+
+
+      const plan =
+        payPlan.value;
+
+
+      const row =
+        PRICING[plan] ||
+        fallback[plan];
+
+
+      if(!row){
+
+        message.className =
+          "payment-status error";
+
+        message.textContent =
+          "Selected plan could not be loaded.";
+
+        return;
+
+      }
+
+
+      const expectedAmount =
+        Number(
+          row.price
+        );
+
+
+      const paidAmount =
+        Number(
+          document.getElementById(
+            "paidAmount"
+          ).value
+        );
+
+
+      if(
+        paidAmount !==
+        expectedAmount
+      ){
+
+        message.className =
+          "payment-status error";
+
+
+        message.textContent =
+          "Please enter the exact current plan amount: " +
+          money(expectedAmount);
+
+
+        return;
+
+      }
+
+
+      const utr =
+        document.getElementById(
+          "utr"
+        ).value
+        .trim();
+
+
+      const transactionDate =
+        document.getElementById(
+          "transactionDate"
+        ).value;
+
+
+      const emailInput =
+        document.getElementById(
+          "payEmail"
+        );
+
+
+      /*
+        Get the currently logged-in user.
+        This is important because the previous
+        version was not sending email to Supabase.
+      */
+
+      const user =
+        await requireUser();
+
+
+      if(!user){
+
+        return;
+
+      }
+
+
+      const email =
+        (
+          user.email ||
+          emailInput.value ||
+          ""
+        )
+        .trim();
+
+
+      if(!email){
+
+        message.className =
+          "payment-status error";
+
+
+        message.textContent =
+          "Your account email could not be found. Please logout and login again.";
+
+        return;
+
+      }
+
+
+      if(!utr){
+
+        message.className =
+          "payment-status error";
+
+
+        message.textContent =
+          "Please enter your UTR / transaction ID.";
+
+        return;
+
+      }
+
+
+      if(!transactionDate){
+
+        message.className =
+          "payment-status error";
+
+
+        message.textContent =
+          "Please select the transaction date.";
+
+        return;
+
+      }
+
+
+      const confirmBox =
+        document.getElementById(
+          "paymentConfirm"
+        );
+
+
+      if(
+        !confirmBox.checked
+      ){
+
+        message.className =
+          "payment-status error";
+
+
+        message.textContent =
+          "Please confirm that you paid the exact amount and entered the correct UTR.";
+
+        return;
+
+      }
+
+
+      const S =
+        await initSB();
+
+
+      if(!S){
+
+        message.className =
+          "payment-status error";
+
+
+        message.textContent =
+          "Supabase is not configured.";
+
+        return;
+
+      }
+
+
+      message.className =
+        "payment-status";
+
+
+      message.textContent =
+        "Submitting payment for verification...";
+
+
+      /*
+        IMPORTANT FIX:
+        email is now explicitly inserted.
+      */
+
+      const result =
+  await S
+  .from("payment_requests")
+  .insert({
+
+    user_id: user.id,
+
+    email: email,
+
+    plan: plan,
+
+    amount: expectedAmount,
+
+    utr: utr,
+
+    transaction_date: transactionDate,
+
+    paid_at: new Date().toISOString(),
+
+    status: "pending"
+
+  });
+
+
+      if(result.error){
+
+        console.error(
+          "Payment submission error:",
+          result.error
+        );
+
+
+        message.className =
+          "payment-status error";
+
+
+        message.textContent =
+          "Payment submission failed: " +
+          result.error.message;
+
+
+        return;
+
+      }
+
+
+      message.className =
+        "payment-status success";
+
+
+      message.textContent =
+        "Payment submitted successfully. Admin will verify the transaction before access is unlocked.";
+
+
+      form.reset();
+
+
+      /*
+        Keep the logged-in user's email
+        visible after reset.
+      */
+
+      const emailAfterReset =
+        document.getElementById(
+          "payEmail"
+        );
+
+
+      if(emailAfterReset){
+
+        emailAfterReset.value =
+          email;
+
+      }
+
+
+      updatePaymentUI(
+        plan
+      );
+
+    }
+  );
+
+}
+
+
+/*
+  Set today's date as the default
+  transaction date.
+*/
+
+const transactionDateInput =
+  document.getElementById(
+    "transactionDate"
+  );
+
+
+if(transactionDateInput){
+
+  const today =
+    new Date();
+
+
+  const year =
+    today.getFullYear();
+
+
+  const month =
+    String(
+      today.getMonth() + 1
+    ).padStart(2,"0");
+
+
+  const day =
+    String(
+      today.getDate()
+    ).padStart(2,"0");
+
+
+  transactionDateInput.value =
+    year +
+    "-" +
+    month +
+    "-" +
+    day;
+
+}
+
+
+/*
+  Load the logged-in user first.
+*/
+
+loadUserEmail();
+
+
+/*
+  Load current pricing.
+*/
+
+loadPricing();
+
+
+})();
+
+</script>
+
+
+</body>
+
+</html>

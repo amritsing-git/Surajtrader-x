@@ -1,0 +1,1849 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Course — SURAJTRADERX</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/jpeg" href="assets/srtx-logo.jpg">
+
+<style>
+/* ================================
+   STUDENT COURSE PAGE
+================================ */
+
+.course-top{
+  margin-bottom:18px;
+}
+
+.student-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:18px;
+}
+
+.student-brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:900;
+}
+
+.student-brand img{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  object-fit:cover;
+}
+
+.student-menu-btn{
+  display:none;
+  width:48px;
+  height:48px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  background:#101426;
+  color:#fff;
+  font-size:25px;
+  cursor:pointer;
+}
+
+/* ================================
+   PDF VIEWER
+================================ */
+
+.pdf-modal{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:none;
+  background:rgba(5,8,20,.84);
+  padding:10px;
+}
+
+.pdf-modal.show{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.pdf-box{
+  width:100%;
+  max-width:1000px;
+  height:95vh;
+  background:#eef0f6;
+  border-radius:18px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 25px 80px rgba(0,0,0,.45);
+}
+
+.pdf-head{
+  min-height:58px;
+  background:linear-gradient(135deg,#171c4a,#3739a8);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+}
+
+.pdf-name{
+  flex:1;
+  min-width:0;
+  font-weight:800;
+  font-size:14px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.pdf-pages{
+  font-size:12px;
+  opacity:.9;
+  white-space:nowrap;
+}
+
+.pdf-control{
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  border-radius:9px;
+  padding:8px 11px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.pdf-body{
+  flex:1;
+  overflow:auto;
+  padding:12px 6px 30px;
+  background:#dfe2ea;
+  text-align:center;
+}
+
+.pdf-canvas{
+  display:block;
+  margin:0 auto 14px;
+  background:#fff;
+  box-shadow:0 3px 14px rgba(0,0,0,.15);
+  max-width:100%;
+}
+
+.pdf-loading{
+  padding:50px 20px;
+  color:#45495b;
+  font-weight:700;
+}
+
+.pdf-error{
+  padding:40px 20px;
+  color:#444;
+}
+
+/* ================================
+   YES / NO POPUP
+================================ */
+
+.confirm-overlay{
+  position:fixed;
+  inset:0;
+  z-index:100000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(4,7,18,.68);
+  backdrop-filter:blur(8px);
+}
+
+.confirm-overlay.show{
+  display:flex;
+}
+
+.confirm-box{
+  width:min(100%,430px);
+  background:#fff;
+  border-radius:24px;
+  padding:26px;
+  box-shadow:0 30px 90px rgba(0,0,0,.35);
+  animation:confirmIn .18s ease-out;
+}
+
+@keyframes confirmIn{
+  from{
+    opacity:0;
+    transform:translateY(12px) scale(.97);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.confirm-icon{
+  width:52px;
+  height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:16px;
+  background:#eef2ff;
+  color:#2939b8;
+  font-size:25px;
+  margin-bottom:16px;
+}
+
+.confirm-box h2{
+  margin:0 0 8px;
+  color:#101426;
+  font-size:24px;
+}
+
+.confirm-box p{
+  margin:0;
+  color:#656b7d;
+  line-height:1.6;
+}
+
+.confirm-file{
+  margin-top:15px;
+  padding:13px 14px;
+  border-radius:13px;
+  background:#f5f6fa;
+  color:#22283a;
+  font-weight:800;
+  font-size:14px;
+  word-break:break-word;
+}
+
+.confirm-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:22px;
+}
+
+.confirm-btn{
+  height:48px;
+  border-radius:13px;
+  border:1px solid #dfe2eb;
+  background:#fff;
+  color:#252a3b;
+  font-size:15px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.confirm-btn.yes{
+  border-color:#283bbf;
+  background:#283bbf;
+  color:#fff;
+}
+
+.confirm-btn:active{
+  transform:scale(.98);
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media(max-width:700px){
+
+  .student-menu-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .student-head{
+    margin-bottom:12px;
+  }
+
+  .pdf-modal{
+    padding:0;
+  }
+
+  .pdf-box{
+    height:100vh;
+    border-radius:0;
+  }
+
+  .pdf-head{
+    padding:7px;
+  }
+
+  .pdf-name{
+    font-size:12px;
+  }
+
+  .pdf-control{
+    padding:7px 9px;
+  }
+
+  .confirm-box{
+    border-radius:21px;
+    padding:22px;
+  }
+
+  .confirm-box h2{
+    font-size:21px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =================================
+     STUDENT HEADER
+================================= -->
+
+<div class="topbar">
+  Educational platform • Trading involves risk • No profit guarantees
+</div>
+
+<header class="nav">
+  <div class="container nav-inner">
+
+    <a class="brand" href="student.html">
+      <img
+        class="brand-logo"
+        src="assets/srtx-logo.jpg"
+        alt="SURAJTRADERX logo"
+      >
+      <span>SURAJTRADERX</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="student.html">Dashboard</a>
+      <a href="student.html#account">My Account</a>
+      <a href="student.html#course">My Course</a>
+      <a href="student.html#materials">Materials</a>
+      <a href="student.html#enrollment">Enrollment</a>
+      <a href="javascript:void(0)" onclick="signOut()">Logout</a>
+    </nav>
+
+    <button
+      class="hamb"
+      type="button"
+      aria-label="Open menu"
+      onclick="toggleMobileMenu()"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+  <div
+    id="mobileMenu"
+    class="container mobile-menu"
+  >
+    <a href="student.html">Dashboard</a>
+    <a href="student.html#account">My Account</a>
+    <a href="student.html#course">My Course</a>
+    <a href="student.html#materials">Materials</a>
+    <a href="student.html#enrollment">Enrollment</a>
+    <a href="javascript:void(0)" onclick="signOut()">Logout</a>
+  </div>
+</header>
+
+
+<!-- =================================
+     MAIN COURSE
+================================= -->
+
+<main>
+
+<section class="section">
+
+<div class="container">
+
+  <div class="course-top">
+
+    <a
+      href="student.html"
+      class="small"
+    >
+      <u>← Back to dashboard</u>
+    </a>
+
+  </div>
+
+  <div id="course">
+
+    <div class="card">
+
+      <h2>
+        Loading your course…
+      </h2>
+
+      <p class="muted">
+        Checking your active enrollment.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<div data-footer></div>
+
+
+<!-- =================================
+     PDF VIEWER
+================================= -->
+
+<div
+  id="pdfModal"
+  class="pdf-modal"
+>
+
+  <div class="pdf-box">
+
+    <div class="pdf-head">
+
+      <div
+        id="pdfName"
+        class="pdf-name"
+      >
+        Course PDF
+      </div>
+
+      <div
+        id="pdfPages"
+        class="pdf-pages"
+      >
+        Loading…
+      </div>
+
+      <button
+        id="pdfPrev"
+        class="pdf-control"
+        type="button"
+      >
+        ←
+      </button>
+
+      <button
+        id="pdfNext"
+        class="pdf-control"
+        type="button"
+      >
+        →
+      </button>
+
+      <button
+        id="pdfClose"
+        class="pdf-control"
+        type="button"
+      >
+        Close
+      </button>
+
+    </div>
+
+    <div
+      id="pdfBody"
+      class="pdf-body"
+    >
+
+      <div class="pdf-loading">
+        Opening PDF…
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =================================
+     YES / NO CONFIRMATION
+================================= -->
+
+<div
+  id="confirmOverlay"
+  class="confirm-overlay"
+>
+
+  <div
+    class="confirm-box"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="confirmTitle"
+  >
+
+    <div class="confirm-icon">
+      PDF
+    </div>
+
+    <h2 id="confirmTitle">
+      Open PDF?
+    </h2>
+
+    <p>
+      Do you want to open this course material?
+    </p>
+
+    <div
+      id="confirmFile"
+      class="confirm-file"
+    >
+      Course PDF
+    </div>
+
+    <div class="confirm-actions">
+
+      <button
+        id="confirmNo"
+        class="confirm-btn"
+        type="button"
+      >
+        NO
+      </button>
+
+      <button
+        id="confirmYes"
+        class="confirm-btn yes"
+        type="button"
+      >
+        YES
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =================================
+     SUPABASE
+================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="supabase.js"></script>
+
+
+<script>
+
+/* =========================================
+   HELPERS
+========================================= */
+
+function esc(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================
+   MOBILE MENU
+========================================= */
+
+function toggleMobileMenu(){
+
+  const menu =
+    document.getElementById("mobileMenu");
+
+  if(!menu)return;
+
+  menu.classList.toggle("show");
+
+}
+
+
+/* =========================================
+   PDF VARIABLES
+========================================= */
+
+let pdfDocument = null;
+
+let pdfCurrentPage = 1;
+
+let pendingPDFUrl = "";
+
+let pendingPDFTitle = "";
+
+
+const pdfModal =
+  document.getElementById("pdfModal");
+
+const pdfBody =
+  document.getElementById("pdfBody");
+
+const pdfName =
+  document.getElementById("pdfName");
+
+const pdfPages =
+  document.getElementById("pdfPages");
+
+const pdfPrev =
+  document.getElementById("pdfPrev");
+
+const pdfNext =
+  document.getElementById("pdfNext");
+
+const pdfClose =
+  document.getElementById("pdfClose");
+
+
+/* =========================================
+   CUSTOM YES / NO POPUP
+========================================= */
+
+const confirmOverlay =
+  document.getElementById("confirmOverlay");
+
+const confirmFile =
+  document.getElementById("confirmFile");
+
+const confirmYes =
+  document.getElementById("confirmYes");
+
+const confirmNo =
+  document.getElementById("confirmNo");
+
+
+window.confirmCoursePDF =
+function(url,title){
+
+  pendingPDFUrl = url;
+  pendingPDFTitle = title || "Course PDF";
+
+  confirmFile.textContent =
+    pendingPDFTitle;
+
+  confirmOverlay.classList.add("show");
+
+  document.body.style.overflow = "hidden";
+
+};
+
+
+/* =========================================
+   NO
+========================================= */
+
+confirmNo.addEventListener(
+  "click",
+  function(){
+
+    closeConfirm();
+
+  }
+);
+
+
+/* =========================================
+   YES
+========================================= */
+
+confirmYes.addEventListener(
+  "click",
+  function(){
+
+    const url =
+      pendingPDFUrl;
+
+    const title =
+      pendingPDFTitle;
+
+    closeConfirm();
+
+    if(!url)return;
+
+    /*
+      IMPORTANT:
+      No download attribute.
+      No forced browser download.
+      PDF opens normally in a new tab.
+    */
+
+    const newWindow =
+      window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+    /*
+      If popup blocker stops the new tab,
+      use the same tab as fallback.
+    */
+
+    if(!newWindow){
+
+      location.href = url;
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   CLOSE CONFIRM
+========================================= */
+
+function closeConfirm(){
+
+  confirmOverlay.classList.remove("show");
+
+  document.body.style.overflow = "";
+
+  pendingPDFUrl = "";
+
+  pendingPDFTitle = "";
+
+}
+
+
+/* =========================================
+   CLICK OUTSIDE
+========================================= */
+
+confirmOverlay.addEventListener(
+  "click",
+  function(e){
+
+    if(e.target === confirmOverlay){
+
+      closeConfirm();
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   ESC CONFIRM
+========================================= */
+
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(
+      e.key === "Escape" &&
+      confirmOverlay.classList.contains("show")
+    ){
+
+      closeConfirm();
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   OPEN INTERNAL PDF VIEWER
+========================================= */
+
+window.openCoursePDF =
+async function(url,title){
+
+  pdfModal.classList.add("show");
+
+  document.body.style.overflow = "hidden";
+
+  pdfName.textContent =
+    title || "Course PDF";
+
+  pdfPages.textContent =
+    "Loading…";
+
+  pdfBody.innerHTML = `
+    <div class="pdf-loading">
+      Opening PDF…
+    </div>
+  `;
+
+  try{
+
+    const pdfjs =
+      await import(
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs"
+      );
+
+    pdfjs.GlobalWorkerOptions.workerSrc =
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
+
+    pdfDocument =
+      await pdfjs.getDocument(url).promise;
+
+    pdfCurrentPage = 1;
+
+    pdfBody.innerHTML = "";
+
+    pdfPages.textContent =
+      "Page 1 of " +
+      pdfDocument.numPages;
+
+    for(
+      let i = 1;
+      i <= pdfDocument.numPages;
+      i++
+    ){
+
+      await renderPDFPage(i);
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "PDF error:",
+      error
+    );
+
+    pdfBody.innerHTML = `
+
+      <div class="pdf-error">
+
+        <h2>
+          Unable to open PDF
+        </h2>
+
+        <p>
+          The PDF could not be loaded.
+          Please refresh the page and try again.
+        </p>
+
+      </div>
+
+    `;
+
+    pdfPages.textContent =
+      "Error";
+
+  }
+
+};
+
+
+/* =========================================
+   RENDER PDF PAGE
+   HIGH QUALITY / HIDPI
+========================================= */
+
+async function renderPDFPage(pageNumber){
+
+  if(!pdfDocument)return;
+
+  const page =
+    await pdfDocument.getPage(
+      pageNumber
+    );
+
+  const base =
+    page.getViewport({
+      scale: 1
+    });
+
+  const availableWidth =
+    Math.min(
+      pdfBody.clientWidth - 16,
+      1000
+    );
+
+  let scale =
+    availableWidth /
+    base.width;
+
+  scale =
+    Math.max(
+      .65,
+      Math.min(
+        scale,
+        1.5
+      )
+    );
+
+  const viewport =
+    page.getViewport({
+      scale: scale
+    });
+
+  const outputScale =
+    Math.min(
+      window.devicePixelRatio || 1,
+      1.75
+    );
+
+  const canvas =
+    document.createElement(
+      "canvas"
+    );
+
+  canvas.className =
+    "pdf-canvas";
+
+  canvas.dataset.page =
+    pageNumber;
+
+  canvas.width =
+    Math.floor(
+      viewport.width *
+      outputScale
+    );
+
+  canvas.height =
+    Math.floor(
+      viewport.height *
+      outputScale
+    );
+
+  canvas.style.width =
+    Math.floor(
+      viewport.width
+    ) + "px";
+
+  canvas.style.height =
+    Math.floor(
+      viewport.height
+    ) + "px";
+
+  pdfBody.appendChild(
+    canvas
+  );
+
+  const ctx =
+    canvas.getContext(
+      "2d",
+      {
+        alpha:false
+      }
+    );
+
+  const transform =
+    outputScale !== 1
+      ? [
+          outputScale,
+          0,
+          0,
+          outputScale,
+          0,
+          0
+        ]
+      : null;
+
+  await page.render({
+
+    canvasContext:
+      ctx,
+
+    viewport:
+      viewport,
+
+    transform:
+      transform
+
+  }).promise;
+
+}
+
+
+/* =========================================
+   CLOSE PDF
+========================================= */
+
+pdfClose.addEventListener(
+  "click",
+  function(){
+
+    pdfModal.classList.remove(
+      "show"
+    );
+
+    document.body.style.overflow =
+      "";
+
+    pdfDocument =
+      null;
+
+    pdfBody.innerHTML =
+      "";
+
+  }
+);
+
+
+/* =========================================
+   PREVIOUS PAGE
+========================================= */
+
+pdfPrev.addEventListener(
+  "click",
+  function(){
+
+    if(!pdfDocument)return;
+
+    pdfCurrentPage =
+      Math.max(
+        1,
+        pdfCurrentPage - 1
+      );
+
+    scrollToPDFPage(
+      pdfCurrentPage
+    );
+
+  }
+);
+
+
+/* =========================================
+   NEXT PAGE
+========================================= */
+
+pdfNext.addEventListener(
+  "click",
+  function(){
+
+    if(!pdfDocument)return;
+
+    pdfCurrentPage =
+      Math.min(
+        pdfDocument.numPages,
+        pdfCurrentPage + 1
+      );
+
+    scrollToPDFPage(
+      pdfCurrentPage
+    );
+
+  }
+);
+
+
+/* =========================================
+   SCROLL TO PDF PAGE
+========================================= */
+
+function scrollToPDFPage(
+  pageNumber
+){
+
+  const page =
+    pdfBody.querySelector(
+      '[data-page="' +
+      pageNumber +
+      '"]'
+    );
+
+  if(!page)return;
+
+  page.scrollIntoView({
+
+    behavior:"smooth",
+
+    block:"start"
+
+  });
+
+  pdfPages.textContent =
+    "Page " +
+    pageNumber +
+    " of " +
+    pdfDocument.numPages;
+
+}
+
+
+/* =========================================
+   ESC CLOSE PDF
+========================================= */
+
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(
+      e.key === "Escape" &&
+      pdfModal.classList.contains(
+        "show"
+      )
+    ){
+
+      pdfClose.click();
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   COURSE LOADING
+========================================= */
+
+(async function(){
+
+  const box =
+    document.getElementById(
+      "course"
+    );
+
+
+  function showError(
+    title,
+    message
+  ){
+
+    box.innerHTML = `
+
+      <div class="card">
+
+        <span class="tag">
+          Course loading error
+        </span>
+
+        <h2>
+          ${esc(title)}
+        </h2>
+
+        <p class="muted">
+          ${esc(message)}
+        </p>
+
+        <div
+          class="actions"
+          style="margin-top:16px"
+        >
+
+          <button
+            class="btn btn-blue"
+            type="button"
+            onclick="location.reload()"
+          >
+            Refresh
+          </button>
+
+          <a
+            class="btn"
+            href="student.html"
+          >
+            Back to Dashboard
+          </a>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  try{
+
+    /* ==============================
+       SUPABASE
+    ============================== */
+
+    const S =
+      await initSB();
+
+    const u =
+      await requireUser();
+
+    if(!S || !u)return;
+
+
+    /* ==============================
+       COURSE ID
+    ============================== */
+
+    let courseId =
+      new URLSearchParams(
+        location.search
+      ).get("id");
+
+
+    /* ==============================
+       ACTIVE ENROLLMENT
+    ============================== */
+
+    let query =
+      S
+        .from("enrollments")
+        .select(
+          "*,courses(*)"
+        )
+        .eq(
+          "user_id",
+          u.id
+        )
+        .eq(
+          "status",
+          "active"
+        );
+
+
+    if(courseId){
+
+      query =
+        query.eq(
+          "course_id",
+          courseId
+        );
+
+    }
+
+
+    const {
+      data: enrollments,
+      error: enrollmentError
+    } =
+      await query.limit(10);
+
+
+    if(enrollmentError){
+
+      console.error(
+        enrollmentError
+      );
+
+      showError(
+        "Could not load your access",
+        enrollmentError.message
+      );
+
+      return;
+
+    }
+
+
+    const en =
+      enrollments &&
+      enrollments.length
+        ? enrollments[0]
+        : null;
+
+
+    /* ==============================
+       NO ACCESS
+    ============================== */
+
+    if(!en){
+
+      box.innerHTML = `
+
+        <div class="card">
+
+          <span class="tag">
+            Access denied
+          </span>
+
+          <h2>
+            This course is not unlocked.
+          </h2>
+
+          <p class="muted">
+            Your account does not have
+            an active approved enrollment.
+          </p>
+
+          <div
+            class="actions"
+            style="margin-top:16px"
+          >
+
+            <button
+              class="btn btn-blue"
+              type="button"
+              onclick="location.reload()"
+            >
+              Refresh
+            </button>
+
+            <a
+              class="btn"
+              href="student.html"
+            >
+              Back to Dashboard
+            </a>
+
+          </div>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    /* ==============================
+       COURSE DATA
+    ============================== */
+
+    courseId =
+      en.course_id;
+
+    const course =
+      en.courses || {};
+
+    const plan =
+      String(
+        en.plan || "basic"
+      ).toLowerCase();
+
+    const premium =
+      plan === "premium";
+
+    const renewal =
+      plan === "renewal";
+
+
+    const planName =
+      premium
+        ? "Premium — ₹2,499"
+        : renewal
+          ? "Premium Renewal — ₹699"
+          : "Basic — ₹1,499";
+
+
+    /* ==============================
+       PDF FILES
+    ============================== */
+
+    const PDF1 =
+      "assets/course-material-1.pdf";
+
+    const PDF2 =
+      "assets/premium-material-2.pdf";
+
+
+    /* ==============================
+       TELEGRAM
+    ============================== */
+
+    const TELEGRAM1 =
+      window.SRTX_CONFIG &&
+      SRTX_CONFIG.TELEGRAM_COURSE
+        ? SRTX_CONFIG.TELEGRAM_COURSE
+        : "https://t.me/+8Vj_UMez_XA5NWQ1";
+
+
+    const TELEGRAM2 =
+      window.SRTX_CONFIG &&
+      SRTX_CONFIG.TELEGRAM_PREMIUM
+        ? SRTX_CONFIG.TELEGRAM_PREMIUM
+        : "https://t.me/+Yw3zM7d5CpYzZTM1";
+
+
+    /* ==============================
+       RESOURCES
+    ============================== */
+
+    let resources = `
+
+      <div
+        class="card"
+        style="margin-top:16px"
+      >
+
+        <span class="tag">
+          Your access
+        </span>
+
+        <h2>
+          ${esc(planName)}
+        </h2>
+
+        <p class="muted">
+          Your resources are shown according
+          to the plan approved for your account.
+        </p>
+
+        <div
+          class="grid grid-2"
+          style="margin-top:14px"
+        >
+
+    `;
+
+
+    /* ==============================
+       PDF 1
+       BASIC + PREMIUM
+    ============================== */
+
+    if(
+      plan === "basic" ||
+      premium
+    ){
+
+      resources += `
+
+        <div class="resource-card">
+
+          <span class="tag">
+            Included PDF
+          </span>
+
+          <h3>
+            Trading Course Material — PDF 1
+          </h3>
+
+          <p class="muted">
+            Included with the ₹1,499
+            and ₹2,499 plans.
+          </p>
+
+          <div class="actions">
+
+            <button
+              class="btn btn-blue"
+              type="button"
+              onclick="openCoursePDF(
+                '${PDF1}',
+                'Trading Course Material — PDF 1'
+              )"
+            >
+              View PDF
+            </button>
+
+            <button
+              class="btn"
+              type="button"
+              onclick="confirmCoursePDF(
+                '${PDF1}',
+                'Trading Course Material — PDF 1'
+              )"
+            >
+              Open / Download ↗
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* ==============================
+       PDF 2
+       PREMIUM ONLY
+    ============================== */
+
+    if(premium){
+
+      resources += `
+
+        <div class="resource-card">
+
+          <span class="tag">
+            Premium PDF
+          </span>
+
+          <h3>
+            Premium Trading Material — PDF 2
+          </h3>
+
+          <p class="muted">
+            Exclusive to the ₹2,499
+            Premium plan.
+          </p>
+
+          <div class="actions">
+
+            <button
+              class="btn btn-blue"
+              type="button"
+              onclick="openCoursePDF(
+                '${PDF2}',
+                'Premium Trading Material — PDF 2'
+              )"
+            >
+              View PDF
+            </button>
+
+            <button
+              class="btn"
+              type="button"
+              onclick="confirmCoursePDF(
+                '${PDF2}',
+                'Premium Trading Material — PDF 2'
+              )"
+            >
+              Open / Download ↗
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    resources += `
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    /* ==============================
+       TELEGRAM 1
+       BASIC + PREMIUM
+    ============================== */
+
+    if(
+      plan === "basic" ||
+      premium
+    ){
+
+      resources += `
+
+        <div
+          class="card"
+          style="margin-top:16px"
+        >
+
+          <span class="tag">
+            Telegram access
+          </span>
+
+          <h2>
+            Learning & Live Support
+          </h2>
+
+          <p class="muted">
+            Your plan includes this Telegram
+            channel for learning updates,
+            videos and live doubt-solving.
+          </p>
+
+          <a
+            class="btn btn-blue"
+            href="${esc(TELEGRAM1)}"
+            target="_blank"
+            rel="noopener"
+          >
+            Open Telegram Channel ↗
+          </a>
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* ==============================
+       TELEGRAM 2
+       PREMIUM + RENEWAL
+    ============================== */
+
+    if(
+      premium ||
+      renewal
+    ){
+
+      resources += `
+
+        <div
+          class="card"
+          style="margin-top:16px"
+        >
+
+          <span class="tag">
+            Premium Telegram
+          </span>
+
+          <h2>
+            Premium Community
+          </h2>
+
+          <p class="muted">
+
+            ${
+              premium
+                ? "Your ₹2,499 Premium plan includes the additional Premium Telegram channel."
+                : "Your ₹699 renewal gives access to the Premium Telegram channel."
+            }
+
+          </p>
+
+          <a
+            class="btn btn-blue"
+            href="${esc(TELEGRAM2)}"
+            target="_blank"
+            rel="noopener"
+          >
+            Open Premium Telegram ↗
+          </a>
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* ==============================
+       MODULES
+    ============================== */
+
+    const {
+      data: modules,
+      error: modulesError
+    } =
+      await S
+        .from("modules")
+        .select("*")
+        .eq(
+          "course_id",
+          courseId
+        )
+        .order(
+          "position",
+          {
+            ascending:true
+          }
+        );
+
+
+    if(modulesError){
+
+      console.error(
+        modulesError
+      );
+
+      showError(
+        "Curriculum could not load",
+        modulesError.message
+      );
+
+      return;
+
+    }
+
+
+    /* ==============================
+       COURSE HEADER
+    ============================== */
+
+    let html = `
+
+      <div class="card">
+
+        <span class="tag">
+          Unlocked course
+        </span>
+
+        <h1>
+          ${esc(
+            course.title ||
+            "NIFTY 15-Minute Breakout Strategy"
+          )}
+        </h1>
+
+        <p class="lead">
+          ${esc(
+            course.description ||
+            "Your approved SURAJTRADERX learning area."
+          )}
+        </p>
+
+      </div>
+
+      ${resources}
+
+    `;
+
+
+    /* ==============================
+       MODULES + LESSONS
+    ============================== */
+
+    for(
+      const module of
+      (modules || [])
+    ){
+
+      const {
+        data: lessons,
+        error: lessonError
+      } =
+        await S
+          .from("lessons")
+          .select("*")
+          .eq(
+            "module_id",
+            module.id
+          )
+          .order(
+            "position",
+            {
+              ascending:true
+            }
+          );
+
+
+      if(lessonError){
+
+        console.error(
+          lessonError
+        );
+
+        showError(
+          "Lessons could not load",
+          lessonError.message
+        );
+
+        return;
+
+      }
+
+
+      html += `
+
+        <div
+          class="card"
+          style="margin-top:16px"
+        >
+
+          <span class="tag">
+            Module ${esc(module.position)}
+          </span>
+
+          <h2>
+            ${esc(module.title)}
+          </h2>
+
+          ${
+            (lessons || []).length
+
+              ?
+
+              lessons
+                .map(
+                  lesson => `
+
+                    <div class="lesson">
+
+                      <h3>
+                        ${esc(
+                          lesson.title
+                        )}
+                      </h3>
+
+                      <p class="muted">
+                        ${esc(
+                          lesson.content || ""
+                        )}
+                      </p>
+
+                      ${
+                        lesson.video_url
+                          ?
+
+                          `
+
+                            <a
+                              class="btn video-link"
+                              href="${esc(
+                                lesson.video_url
+                              )}"
+                              target="_blank"
+                              rel="noopener"
+                            >
+                              Open Lesson Video ↗
+                            </a>
+
+                          `
+
+                          : ""
+                      }
+
+                    </div>
+
+                  `
+                )
+                .join("")
+
+              :
+
+              `
+
+                <p class="muted">
+                  Lessons will appear here
+                  when added by the admin.
+                </p>
+
+              `
+          }
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* ==============================
+       DISPLAY
+    ============================== */
+
+    box.innerHTML =
+      html;
+
+
+  }catch(error){
+
+    console.error(
+      "Course error:",
+      error
+    );
+
+    showError(
+      "Something went wrong",
+      error.message ||
+      "The course could not be loaded."
+    );
+
+  }
+
+})();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2310 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>Student Dashboard — SURAJTRADERX</title>
+
+<link
+  rel="stylesheet"
+  href="style.css"
+>
+
+<link
+  rel="icon"
+  type="image/jpeg"
+  href="assets/srtx-logo.jpg"
+>
+
+<style>
+
+/* =========================================================
+   STUDENT PORTAL ONLY
+   Does not change the public website.
+========================================================= */
+
+:root{
+  --student-bg:#f5f7fb;
+  --student-card:#ffffff;
+  --student-text:#101828;
+  --student-muted:#667085;
+  --student-border:#e7eaf0;
+  --student-blue:#315bea;
+  --student-blue-dark:#2448c8;
+  --student-green:#159957;
+  --student-sidebar:#0d1424;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body.student-portal{
+  margin:0;
+  background:var(--student-bg);
+  color:var(--student-text);
+}
+
+.student-app{
+  min-height:100vh;
+  display:flex;
+}
+
+/* ================= SIDEBAR ================= */
+
+.student-sidebar{
+  width:270px;
+  min-width:270px;
+  min-height:100vh;
+  background:var(--student-sidebar);
+  color:#fff;
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  z-index:1000;
+  display:flex;
+  flex-direction:column;
+  padding:22px 16px;
+}
+
+.student-brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:6px 8px 25px;
+  border-bottom:1px solid rgba(255,255,255,.09);
+}
+
+.student-brand img{
+  width:40px;
+  height:40px;
+  border-radius:11px;
+  object-fit:cover;
+}
+
+.student-brand strong{
+  font-size:17px;
+  letter-spacing:.3px;
+}
+
+.student-brand small{
+  display:block;
+  margin-top:2px;
+  color:#98a2b3;
+  font-size:11px;
+}
+
+.student-nav{
+  padding-top:22px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.student-nav button{
+  border:0;
+  background:transparent;
+  color:#aeb7c8;
+  width:100%;
+  min-height:48px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 14px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  text-align:left;
+  transition:.2s ease;
+}
+
+.student-nav button:hover{
+  background:rgba(255,255,255,.07);
+  color:#fff;
+}
+
+.student-nav button.active{
+  background:#315bea;
+  color:#fff;
+  box-shadow:0 8px 22px rgba(49,91,234,.22);
+}
+
+.student-nav .icon{
+  width:22px;
+  text-align:center;
+  font-size:17px;
+}
+
+.student-sidebar-bottom{
+  margin-top:auto;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.09);
+}
+
+.logout-btn{
+  width:100%;
+  border:0;
+  min-height:48px;
+  border-radius:12px;
+  background:rgba(255,255,255,.06);
+  color:#ffb4b4;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 14px;
+}
+
+.logout-btn:hover{
+  background:rgba(255,80,80,.12);
+}
+
+/* ================= MAIN ================= */
+
+.student-main{
+  margin-left:270px;
+  width:calc(100% - 270px);
+  min-height:100vh;
+}
+
+.student-topbar{
+  height:76px;
+  background:#fff;
+  border-bottom:1px solid var(--student-border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 34px;
+  position:sticky;
+  top:0;
+  z-index:500;
+}
+
+.student-page-title{
+  font-size:18px;
+  font-weight:850;
+}
+
+.student-top-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.student-avatar{
+  width:39px;
+  height:39px;
+  border-radius:50%;
+  background:#e9edff;
+  color:var(--student-blue);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+}
+
+.student-user-name{
+  font-size:13px;
+  font-weight:800;
+}
+
+.student-content{
+  padding:34px;
+  max-width:1250px;
+}
+
+/* ================= MOBILE HEADER ================= */
+
+.student-mobile-header{
+  display:none;
+  height:68px;
+  background:#fff;
+  border-bottom:1px solid var(--student-border);
+  align-items:center;
+  justify-content:space-between;
+  padding:0 17px;
+  position:sticky;
+  top:0;
+  z-index:900;
+}
+
+.student-mobile-brand{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-weight:900;
+}
+
+.student-mobile-brand img{
+  width:35px;
+  height:35px;
+  border-radius:9px;
+}
+
+.student-menu-btn{
+  width:43px;
+  height:43px;
+  border:1px solid var(--student-border);
+  background:#fff;
+  border-radius:11px;
+  cursor:pointer;
+  font-size:21px;
+}
+
+/* ================= OVERLAY ================= */
+
+.student-overlay{
+  display:none;
+}
+
+/* ================= PAGE SECTIONS ================= */
+
+.student-section{
+  display:none;
+}
+
+.student-section.active{
+  display:block;
+}
+
+.student-welcome{
+  margin-bottom:27px;
+}
+
+.student-welcome .eyebrow{
+  font-size:12px;
+  color:var(--student-blue);
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.student-welcome h1{
+  margin:7px 0 8px;
+  font-size:34px;
+  line-height:1.15;
+  letter-spacing:-.8px;
+}
+
+.student-welcome p{
+  margin:0;
+  color:var(--student-muted);
+}
+
+/* ================= CARDS ================= */
+
+.student-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.student-card{
+  background:var(--student-card);
+  border:1px solid var(--student-border);
+  border-radius:18px;
+  padding:23px;
+  box-shadow:0 7px 25px rgba(16,24,40,.035);
+}
+
+.student-card h3{
+  margin:0 0 8px;
+  font-size:17px;
+}
+
+.student-card p{
+  color:var(--student-muted);
+  font-size:13px;
+  line-height:1.65;
+  margin:0;
+}
+
+.student-card-wide{
+  grid-column:span 2;
+}
+
+.student-stat{
+  font-size:25px;
+  font-weight:950;
+  margin-top:7px;
+}
+
+.student-label{
+  color:var(--student-muted);
+  font-size:12px;
+  font-weight:700;
+}
+
+/* ================= COURSE ================= */
+
+.course-card{
+  background:#fff;
+  border:1px solid var(--student-border);
+  border-radius:20px;
+  padding:27px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:22px;
+  box-shadow:0 8px 28px rgba(16,24,40,.04);
+}
+
+.course-info h2{
+  margin:8px 0 8px;
+  font-size:22px;
+}
+
+.course-info p{
+  margin:0;
+  color:var(--student-muted);
+  line-height:1.6;
+}
+
+.student-tag{
+  display:inline-flex;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#eef2ff;
+  color:var(--student-blue);
+  font-size:11px;
+  font-weight:900;
+}
+
+.student-tag.green{
+  background:#eaf9f0;
+  color:var(--student-green);
+}
+
+.student-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:45px;
+  padding:0 18px;
+  border-radius:11px;
+  border:0;
+  background:var(--student-blue);
+  color:#fff;
+  text-decoration:none;
+  font-weight:850;
+  font-size:13px;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:.2s;
+}
+
+.student-btn:hover{
+  background:var(--student-blue-dark);
+  transform:translateY(-1px);
+}
+
+/* ================= LIST ================= */
+
+.student-list{
+  display:grid;
+  gap:11px;
+  margin-top:17px;
+}
+
+.student-list-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px;
+  border:1px solid var(--student-border);
+  border-radius:12px;
+  background:#fbfcfe;
+}
+
+.student-list-icon{
+  width:34px;
+  height:34px;
+  border-radius:9px;
+  background:#eef2ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.student-list-item strong{
+  font-size:13px;
+}
+
+.student-list-item small{
+  display:block;
+  color:var(--student-muted);
+  margin-top:3px;
+}
+
+/* ================= ACCOUNT ================= */
+
+.account-row{
+  display:grid;
+  grid-template-columns:170px 1fr;
+  gap:15px;
+  padding:15px 0;
+  border-bottom:1px solid var(--student-border);
+}
+
+.account-row:last-child{
+  border-bottom:0;
+}
+
+.account-label{
+  color:var(--student-muted);
+  font-size:13px;
+  font-weight:700;
+}
+
+.account-value{
+  font-size:14px;
+  font-weight:800;
+}
+
+/* ================= EMPTY / LOADING ================= */
+
+.student-loading{
+  background:#fff;
+  border:1px solid var(--student-border);
+  border-radius:18px;
+  padding:30px;
+  color:var(--student-muted);
+}
+
+.student-error{
+  background:#fff1f1;
+  color:#a61b1b;
+  border:1px solid #ffd1d1;
+  border-radius:15px;
+  padding:18px;
+}
+
+.student-empty{
+  background:#fff;
+  border:1px solid var(--student-border);
+  border-radius:18px;
+  padding:28px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+  .student-sidebar{
+    transform:translateX(-105%);
+    transition:.25s ease;
+    box-shadow:20px 0 45px rgba(0,0,0,.15);
+  }
+
+  .student-sidebar.open{
+    transform:translateX(0);
+  }
+
+  .student-main{
+    margin-left:0;
+    width:100%;
+  }
+
+  .student-mobile-header{
+    display:flex;
+  }
+
+  .student-topbar{
+    display:none;
+  }
+
+  .student-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(10,18,32,.45);
+    z-index:950;
+  }
+
+  .student-overlay.open{
+    display:block;
+  }
+
+  .student-content{
+    padding:24px 17px 35px;
+  }
+
+  .student-grid{
+    grid-template-columns:1fr;
+  }
+
+  .student-card-wide{
+    grid-column:span 1;
+  }
+
+  .course-card{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+}
+
+@media(max-width:550px){
+
+  .student-welcome h1{
+    font-size:28px;
+  }
+
+  .student-card{
+    padding:19px;
+  }
+
+  .account-row{
+    grid-template-columns:1fr;
+    gap:5px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body
+  class="student-portal"
+  data-page="student"
+>
+
+
+<div class="student-app">
+
+
+<!-- =====================================================
+     STUDENT SIDEBAR
+===================================================== -->
+
+<aside
+  id="studentSidebar"
+  class="student-sidebar"
+>
+
+  <div class="student-brand">
+
+    <img
+      src="assets/srtx-logo.jpg"
+      alt="SURAJTRADERX"
+    >
+
+    <div>
+
+      <strong>SURAJTRADERX</strong>
+
+      <small>Student Portal</small>
+
+    </div>
+
+  </div>
+
+
+  <nav class="student-nav">
+
+    <button
+      class="active"
+      data-section="dashboard"
+      type="button"
+    >
+
+      <span class="icon">⌂</span>
+
+      <span>Dashboard</span>
+
+    </button>
+
+
+    <button
+      data-section="account"
+      type="button"
+    >
+
+      <span class="icon">◉</span>
+
+      <span>My Account</span>
+
+    </button>
+
+
+    <button
+      data-section="course"
+      type="button"
+    >
+
+      <span class="icon">▣</span>
+
+      <span>My Course</span>
+
+    </button>
+
+
+    <button
+      data-section="materials"
+      type="button"
+    >
+
+      <span class="icon">▤</span>
+
+      <span>Materials</span>
+
+    </button>
+
+
+    <button
+      data-section="enrollment"
+      type="button"
+    >
+
+      <span class="icon">₹</span>
+
+      <span>Enrollment</span>
+
+    </button>
+
+  </nav>
+
+
+  <div class="student-sidebar-bottom">
+
+    <button
+      id="logoutButton"
+      class="logout-btn"
+      type="button"
+    >
+
+      <span class="icon">↪</span>
+
+      <span>Logout</span>
+
+    </button>
+
+  </div>
+
+</aside>
+
+
+<!-- MOBILE OVERLAY -->
+
+<div
+  id="studentOverlay"
+  class="student-overlay"
+></div>
+
+
+<!-- =====================================================
+     MAIN AREA
+===================================================== -->
+
+<div class="student-main">
+
+
+<!-- MOBILE HEADER -->
+
+<header class="student-mobile-header">
+
+  <div class="student-mobile-brand">
+
+    <img
+      src="assets/srtx-logo.jpg"
+      alt="SURAJTRADERX"
+    >
+
+    <span>Student Portal</span>
+
+  </div>
+
+
+  <button
+    id="studentMenuButton"
+    class="student-menu-btn"
+    type="button"
+    aria-label="Open student menu"
+  >
+    ☰
+  </button>
+
+</header>
+
+
+<!-- DESKTOP TOPBAR -->
+
+<div class="student-topbar">
+
+  <div
+    id="studentPageTitle"
+    class="student-page-title"
+  >
+    Dashboard
+  </div>
+
+
+  <div class="student-top-right">
+
+    <div>
+
+      <div
+        id="topStudentName"
+        class="student-user-name"
+      >
+        Student
+      </div>
+
+    </div>
+
+
+    <div
+      id="studentAvatar"
+      class="student-avatar"
+    >
+      S
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- CONTENT -->
+
+<main class="student-content">
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section
+  id="section-dashboard"
+  class="student-section active"
+>
+
+  <div class="student-welcome">
+
+    <div class="eyebrow">
+      Student Area
+    </div>
+
+    <h1 id="welcome">
+      Welcome 👋
+    </h1>
+
+    <p>
+      Manage your course, account and unlocked resources from one place.
+    </p>
+
+  </div>
+
+
+  <div
+    id="dashboardState"
+    class="student-grid"
+  >
+
+    <div class="student-loading">
+      Loading your student account...
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     ACCOUNT
+===================================================== -->
+
+<section
+  id="section-account"
+  class="student-section"
+>
+
+  <div class="student-welcome">
+
+    <div class="eyebrow">
+      Account
+    </div>
+
+    <h1>
+      My Account
+    </h1>
+
+    <p>
+      Your registered account details.
+    </p>
+
+  </div>
+
+
+  <div
+    id="accountState"
+    class="student-card"
+  >
+
+    Loading account...
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     COURSE
+===================================================== -->
+
+<section
+  id="section-course"
+  class="student-section"
+>
+
+  <div class="student-welcome">
+
+    <div class="eyebrow">
+      Learning
+    </div>
+
+    <h1>
+      My Course
+    </h1>
+
+    <p>
+      Open the course that has been approved for your account.
+    </p>
+
+  </div>
+
+
+  <div
+    id="courseState"
+  >
+
+    <div class="student-loading">
+      Checking your course access...
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     MATERIALS
+===================================================== -->
+
+<section
+  id="section-materials"
+  class="student-section"
+>
+
+  <div class="student-welcome">
+
+    <div class="eyebrow">
+      Resources
+    </div>
+
+    <h1>
+      Course Materials
+    </h1>
+
+    <p>
+      Access only the materials unlocked for your approved plan.
+    </p>
+
+  </div>
+
+
+  <div
+    id="materialsState"
+  >
+
+    <div class="student-loading">
+      Loading your materials...
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     ENROLLMENT
+===================================================== -->
+
+<section
+  id="section-enrollment"
+  class="student-section"
+>
+
+  <div class="student-welcome">
+
+    <div class="eyebrow">
+      Enrollment
+    </div>
+
+    <h1>
+      My Enrollment
+    </h1>
+
+    <p>
+      View your current approved course access.
+    </p>
+
+  </div>
+
+
+  <div
+    id="enrollmentState"
+  >
+
+    <div class="student-loading">
+      Loading enrollment...
+    </div>
+
+  </div>
+
+</section>
+
+
+</main>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     SCRIPTS
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+<script src="app.js"></script>
+
+<script src="supabase.js"></script>
+
+
+<script>
+
+(function(){
+
+"use strict";
+
+
+let SB = null;
+let USER = null;
+let PROFILE = null;
+let ENROLLMENTS = [];
+
+
+const titles = {
+
+  dashboard:"Dashboard",
+
+  account:"My Account",
+
+  course:"My Course",
+
+  materials:"Materials",
+
+  enrollment:"Enrollment"
+
+};
+
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+function esc(value){
+
+  if(
+    value === null ||
+    value === undefined
+  ){
+
+    return "";
+
+  }
+
+  return String(value)
+
+    .replace(/&/g,"&amp;")
+
+    .replace(/</g,"&lt;")
+
+    .replace(/>/g,"&gt;")
+
+    .replace(/"/g,"&quot;")
+
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function planName(plan){
+
+  if(plan === "premium"){
+
+    return "Premium — ₹2,499";
+
+  }
+
+  if(plan === "renewal"){
+
+    return "Premium Renewal — ₹699";
+
+  }
+
+  return "Basic — ₹1,499";
+
+}
+
+
+function isPremium(plan){
+
+  return (
+    plan === "premium" ||
+    plan === "renewal"
+  );
+
+}
+
+
+function openSection(section){
+
+  document
+    .querySelectorAll(".student-section")
+    .forEach(function(item){
+
+      item.classList.remove("active");
+
+    });
+
+
+  const target =
+    document.getElementById(
+      "section-" + section
+    );
+
+
+  if(target){
+
+    target.classList.add("active");
+
+  }
+
+
+  document
+    .querySelectorAll(".student-nav button")
+    .forEach(function(button){
+
+      button.classList.toggle(
+        "active",
+        button.dataset.section === section
+      );
+
+    });
+
+
+  const title =
+    document.getElementById(
+      "studentPageTitle"
+    );
+
+
+  if(title){
+
+    title.textContent =
+      titles[section] || "Student Portal";
+
+  }
+
+
+  closeMobileSidebar();
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+document
+  .querySelectorAll(".student-nav button")
+  .forEach(function(button){
+
+    button.addEventListener(
+      "click",
+      function(){
+
+        openSection(
+          button.dataset.section
+        );
+
+      }
+    );
+
+  });
+
+
+const menuButton =
+  document.getElementById(
+    "studentMenuButton"
+  );
+
+
+const sidebar =
+  document.getElementById(
+    "studentSidebar"
+  );
+
+
+const overlay =
+  document.getElementById(
+    "studentOverlay"
+  );
+
+
+function closeMobileSidebar(){
+
+  sidebar.classList.remove("open");
+
+  overlay.classList.remove("open");
+
+}
+
+
+function openMobileSidebar(){
+
+  sidebar.classList.add("open");
+
+  overlay.classList.add("open");
+
+}
+
+
+if(menuButton){
+
+  menuButton.addEventListener(
+    "click",
+    openMobileSidebar
+  );
+
+}
+
+
+if(overlay){
+
+  overlay.addEventListener(
+    "click",
+    closeMobileSidebar
+  );
+
+}
+
+
+/* =====================================================
+   LOAD STUDENT
+===================================================== */
+
+async function loadStudent(){
+
+  SB =
+    await initSB();
+
+
+  if(!SB){
+
+    showGlobalError(
+      "Supabase could not be initialized."
+    );
+
+    return;
+
+  }
+
+
+  USER =
+    await requireUser();
+
+
+  if(!USER){
+
+    return;
+
+  }
+
+
+  /*
+    IMPORTANT:
+    requireUser() protects the page.
+    We do NOT redirect to public pages.
+  */
+
+
+  const profileResult =
+    await SB
+      .from("profiles")
+      .select(
+        "full_name,email"
+      )
+      .eq(
+        "id",
+        USER.id
+      )
+      .maybeSingle();
+
+
+  PROFILE =
+    profileResult.data || {
+
+      full_name:
+        USER.user_metadata?.full_name ||
+        "Student",
+
+      email:
+        USER.email || ""
+
+    };
+
+
+  updateStudentIdentity();
+
+
+  const enrollmentResult =
+    await SB
+      .from("enrollments")
+      .select(
+        "*,courses(*)"
+      )
+      .eq(
+        "user_id",
+        USER.id
+      )
+      .eq(
+        "status",
+        "active"
+      );
+
+
+  if(enrollmentResult.error){
+
+    showGlobalError(
+      enrollmentResult.error.message
+    );
+
+    return;
+
+  }
+
+
+  ENROLLMENTS =
+    enrollmentResult.data || [];
+
+
+  renderDashboard();
+
+  renderAccount();
+
+  renderCourse();
+
+  renderMaterials();
+
+  renderEnrollment();
+
+}
+
+
+/* =====================================================
+   IDENTITY
+===================================================== */
+
+function updateStudentIdentity(){
+
+  const name =
+    PROFILE.full_name ||
+    "Student";
+
+
+  const welcome =
+    document.getElementById(
+      "welcome"
+    );
+
+
+  if(welcome){
+
+    welcome.textContent =
+      "Welcome, " +
+      name +
+      " 👋";
+
+  }
+
+
+  const topName =
+    document.getElementById(
+      "topStudentName"
+    );
+
+
+  if(topName){
+
+    topName.textContent =
+      name;
+
+  }
+
+
+  const avatar =
+    document.getElementById(
+      "studentAvatar"
+    );
+
+
+  if(avatar){
+
+    avatar.textContent =
+      name
+        .trim()
+        .charAt(0)
+        .toUpperCase() || "S";
+
+  }
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function renderDashboard(){
+
+  const container =
+    document.getElementById(
+      "dashboardState"
+    );
+
+
+  if(!container){
+
+    return;
+
+  }
+
+
+  if(!ENROLLMENTS.length){
+
+    container.innerHTML = `
+
+      <div class="student-card student-card-wide">
+
+        <span class="student-tag">
+          Course Locked
+        </span>
+
+        <h3 style="margin-top:14px">
+          Your course is not unlocked yet.
+        </h3>
+
+        <p>
+          Submit your payment and UTR. Access will appear here after manual payment verification by the admin.
+        </p>
+
+        <div style="margin-top:18px">
+
+          <a
+            class="student-btn"
+            href="payment.html"
+          >
+            Go to Payment
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="student-card">
+
+        <div class="student-label">
+          Account
+        </div>
+
+        <div class="student-stat">
+          Active
+        </div>
+
+        <p style="margin-top:7px">
+          Your student account is ready.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const primary =
+    ENROLLMENTS[0];
+
+
+  const plan =
+    planName(
+      primary.plan
+    );
+
+
+  const courseTitle =
+    primary.courses?.title ||
+    "NIFTY 15-Minute Breakout Strategy";
+
+
+  container.innerHTML = `
+
+    <div class="student-card student-card-wide">
+
+      <span class="student-tag green">
+        ✓ Course Unlocked
+      </span>
+
+      <h3 style="margin-top:14px">
+        ${esc(courseTitle)}
+      </h3>
+
+      <p>
+        Your approved ${esc(plan)} access is active.
+      </p>
+
+      <div style="margin-top:18px">
+
+        <button
+          class="student-btn"
+          type="button"
+          onclick="window.studentOpenCourse()"
+        >
+          Open My Course →
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="student-card">
+
+      <div class="student-label">
+        Current Plan
+      </div>
+
+      <div class="student-stat">
+        ${esc(primary.plan === "premium" ? "Premium" :
+            primary.plan === "renewal" ? "Renewal" : "Basic")}
+      </div>
+
+      <p style="margin-top:7px">
+        ${esc(plan)}
+      </p>
+
+    </div>
+
+
+    <div class="student-card">
+
+      <div class="student-label">
+        Access
+      </div>
+
+      <div class="student-stat">
+        Active ✓
+      </div>
+
+      <p style="margin-top:7px">
+        Your approved learning access is active.
+      </p>
+
+    </div>
+
+
+    <div class="student-card student-card-wide">
+
+      <h3>
+        What's included
+      </h3>
+
+      <div class="student-list">
+
+        <div class="student-list-item">
+
+          <div class="student-list-icon">
+            ✓
+          </div>
+
+          <div>
+
+            <strong>
+              Course Lessons
+            </strong>
+
+            <small>
+              Your approved course content
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <div class="student-list-item">
+
+          <div class="student-list-icon">
+            📄
+          </div>
+
+          <div>
+
+            <strong>
+              Course Material PDF 1
+            </strong>
+
+            <small>
+              Available in your course area
+            </small>
+
+          </div>
+
+        </div>
+
+
+        ${
+          isPremium(primary.plan)
+          ? `
+          <div class="student-list-item">
+
+            <div class="student-list-icon">
+              ⭐
+            </div>
+
+            <div>
+
+              <strong>
+                Premium PDF 2
+              </strong>
+
+              <small>
+                Unlocked with Premium access
+              </small>
+
+            </div>
+
+          </div>
+          `
+          : ""
+        }
+
+
+        <div class="student-list-item">
+
+          <div class="student-list-icon">
+            💬
+          </div>
+
+          <div>
+
+            <strong>
+              Telegram Access
+            </strong>
+
+            <small>
+              Based on your approved plan
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   ACCOUNT
+===================================================== */
+
+function renderAccount(){
+
+  const container =
+    document.getElementById(
+      "accountState"
+    );
+
+
+  if(!container){
+
+    return;
+
+  }
+
+
+  container.innerHTML = `
+
+    <h3>
+      Account Information
+    </h3>
+
+    <div style="margin-top:18px">
+
+      <div class="account-row">
+
+        <div class="account-label">
+          Full Name
+        </div>
+
+        <div class="account-value">
+          ${esc(PROFILE.full_name || "Student")}
+        </div>
+
+      </div>
+
+
+      <div class="account-row">
+
+        <div class="account-label">
+          Email
+        </div>
+
+        <div class="account-value">
+          ${esc(PROFILE.email || USER.email || "")}
+        </div>
+
+      </div>
+
+
+      <div class="account-row">
+
+        <div class="account-label">
+          Account Status
+        </div>
+
+        <div class="account-value">
+          <span class="student-tag green">
+            Active
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   COURSE
+===================================================== */
+
+function renderCourse(){
+
+  const container =
+    document.getElementById(
+      "courseState"
+    );
+
+
+  if(!container){
+
+    return;
+
+  }
+
+
+  if(!ENROLLMENTS.length){
+
+    container.innerHTML = `
+
+      <div class="student-empty">
+
+        <span class="student-tag">
+          Locked
+        </span>
+
+        <h3 style="margin-top:14px">
+          No approved course yet.
+        </h3>
+
+        <p style="color:#667085">
+          Your course will appear here after payment verification.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    ENROLLMENTS
+      .map(function(enrollment){
+
+        const title =
+          enrollment.courses?.title ||
+          "NIFTY 15-Minute Breakout Strategy";
+
+
+        return `
+
+          <div class="course-card">
+
+            <div class="course-info">
+
+              <span class="student-tag green">
+                ✓ Unlocked
+              </span>
+
+              <h2>
+                ${esc(title)}
+              </h2>
+
+              <p>
+                ${esc(
+                  enrollment.courses?.description ||
+                  "Your approved SURAJTRADERX trading course."
+                )}
+              </p>
+
+              <div style="margin-top:13px">
+
+                <span class="student-tag">
+                  ${esc(planName(enrollment.plan))}
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div>
+
+              <a
+                class="student-btn"
+                href="course.html?id=${encodeURIComponent(enrollment.course_id)}"
+              >
+                Start Learning →
+              </a>
+
+            </div>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+}
+
+
+/* =====================================================
+   MATERIALS
+===================================================== */
+
+function renderMaterials(){
+
+  const container =
+    document.getElementById(
+      "materialsState"
+    );
+
+
+  if(!container){
+
+    return;
+
+  }
+
+
+  if(!ENROLLMENTS.length){
+
+    container.innerHTML = `
+
+      <div class="student-empty">
+
+        <span class="student-tag">
+          Locked
+        </span>
+
+        <h3 style="margin-top:14px">
+          Materials will appear after approval.
+        </h3>
+
+        <p style="color:#667085">
+          Once your payment is verified, your approved resources will appear here.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const enrollment =
+    ENROLLMENTS[0];
+
+
+  const premium =
+    isPremium(
+      enrollment.plan
+    );
+
+
+  container.innerHTML = `
+
+    <div class="student-card">
+
+      <h3>
+        Available Materials
+      </h3>
+
+      <p>
+        Your resources are controlled by your approved enrollment plan.
+      </p>
+
+
+      <div class="student-list">
+
+        <div class="student-list-item">
+
+          <div class="student-list-icon">
+            📄
+          </div>
+
+          <div style="flex:1">
+
+            <strong>
+              Course Material 1
+            </strong>
+
+            <small>
+              Available
+            </small>
+
+          </div>
+
+          <a
+            class="student-btn"
+            href="course.html?id=${encodeURIComponent(enrollment.course_id)}"
+          >
+            Open
+          </a>
+
+        </div>
+
+
+        <div class="student-list-item">
+
+          <div class="student-list-icon">
+            ${premium ? "⭐" : "🔒"}
+          </div>
+
+          <div style="flex:1">
+
+            <strong>
+              Premium Material 2
+            </strong>
+
+            <small>
+              ${
+                premium
+                ? "Unlocked with Premium access"
+                : "Available only with Premium access"
+              }
+            </small>
+
+          </div>
+
+          ${
+            premium
+            ? `
+              <a
+                class="student-btn"
+                href="course.html?id=${encodeURIComponent(enrollment.course_id)}"
+              >
+                Open
+              </a>
+            `
+            : `
+              <span class="student-tag">
+                Locked
+              </span>
+            `
+          }
+
+        </div>
+
+
+        <div class="student-list-item">
+
+          <div class="student-list-icon">
+            💬
+          </div>
+
+          <div style="flex:1">
+
+            <strong>
+              Telegram Resources
+            </strong>
+
+            <small>
+              ${
+                premium
+                ? "Course + Premium Telegram access"
+                : "Course Telegram access"
+              }
+            </small>
+
+          </div>
+
+          <a
+            class="student-btn"
+            href="course.html?id=${encodeURIComponent(enrollment.course_id)}"
+          >
+            View
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   ENROLLMENT
+===================================================== */
+
+function renderEnrollment(){
+
+  const container =
+    document.getElementById(
+      "enrollmentState"
+    );
+
+
+  if(!container){
+
+    return;
+
+  }
+
+
+  if(!ENROLLMENTS.length){
+
+    container.innerHTML = `
+
+      <div class="student-empty">
+
+        <span class="student-tag">
+          No Active Enrollment
+        </span>
+
+        <h3 style="margin-top:14px">
+          Your enrollment is currently pending.
+        </h3>
+
+        <p style="color:#667085">
+          Complete payment and wait for admin verification.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    ENROLLMENTS
+      .map(function(enrollment){
+
+        const course =
+          enrollment.courses;
+
+
+        const title =
+          course?.title ||
+          "NIFTY 15-Minute Breakout Strategy";
+
+
+        const price =
+          enrollment.plan === "premium"
+          ? "₹2,499"
+          : enrollment.plan === "renewal"
+          ? "₹699"
+          : "₹1,499";
+
+
+        return `
+
+          <div class="student-card">
+
+            <span class="student-tag green">
+              Active
+            </span>
+
+            <h3 style="margin-top:14px">
+              ${esc(title)}
+            </h3>
+
+            <div class="student-list">
+
+              <div class="student-list-item">
+
+                <div class="student-list-icon">
+                  ✓
+                </div>
+
+                <div>
+
+                  <strong>
+                    Plan
+                  </strong>
+
+                  <small>
+                    ${esc(planName(enrollment.plan))}
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <div class="student-list-item">
+
+                <div class="student-list-icon">
+                  ₹
+                </div>
+
+                <div>
+
+                  <strong>
+                    Approved Amount
+                  </strong>
+
+                  <small>
+                    ${price}
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <div class="student-list-item">
+
+                <div class="student-list-icon">
+                  ✓
+                </div>
+
+                <div>
+
+                  <strong>
+                    Access Status
+                  </strong>
+
+                  <small>
+                    Active
+                  </small>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+}
+
+
+/* =====================================================
+   OPEN COURSE
+===================================================== */
+
+window.studentOpenCourse =
+  function(){
+
+    if(!ENROLLMENTS.length){
+
+      openSection("enrollment");
+
+      return;
+
+    }
+
+
+    const enrollment =
+      ENROLLMENTS[0];
+
+
+    location.href =
+      "course.html?id=" +
+      encodeURIComponent(
+        enrollment.course_id
+      );
+
+  };
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+const logoutButton =
+  document.getElementById(
+    "logoutButton"
+  );
+
+
+if(logoutButton){
+
+  logoutButton.addEventListener(
+    "click",
+    async function(){
+
+      logoutButton.disabled = true;
+
+      logoutButton.innerHTML =
+        "<span>...</span><span>Logging out</span>";
+
+
+      try{
+
+        await signOut();
+
+      }catch(error){
+
+        console.error(error);
+
+        location.href =
+          "login.html";
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+function showGlobalError(message){
+
+  const html = `
+
+    <div class="student-error">
+
+      <strong>
+        Could not load your student account.
+      </strong>
+
+      <div style="margin-top:6px">
+        ${esc(message)}
+      </div>
+
+    </div>
+
+  `;
+
+
+  const ids = [
+
+    "dashboardState",
+    "accountState",
+    "courseState",
+    "materialsState",
+    "enrollmentState"
+
+  ];
+
+
+  ids.forEach(function(id){
+
+    const element =
+      document.getElementById(id);
+
+
+    if(element){
+
+      element.innerHTML =
+        html;
+
+    }
+
+  });
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadStudent();
+
+})();
+
+</script>
+
+</body>
+
+</html>

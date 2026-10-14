@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SURAJTRADERX | NIFTY Trading Course</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:#f7f9fc;
+  color:#111827;
+  line-height:1.6;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button{
+  font-family:inherit;
+}
+
+.container{
+  width:min(1160px,calc(100% - 32px));
+  margin:auto;
+}
+
+/* TOP BAR */
+
+.topbar{
+  background:linear-gradient(90deg,#111827,#243b78,#4f46a5);
+  color:#fff;
+  text-align:center;
+  padding:9px 15px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.06em;
+}
+
+/* NAVBAR */
+
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid #e5eaf2;
+}
+
+.nav-inner{
+  min-height:74px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:15px;
+  font-weight:950;
+  letter-spacing:.08em;
+}
+
+.logo-box{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  color:white;
+  font-size:17px;
+  font-weight:950;
+  background:linear-gradient(135deg,#2563eb,#06b6d4,#7c3aed);
+  box-shadow:0 10px 25px rgba(37,99,235,.22);
+}
+
+.site-logo{width:40px;height:40px;border-radius:12px;object-fit:cover;display:block;border:1px solid #dfe5ef;box-shadow:0 10px 25px rgba(37,99,235,.14)}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:3px;
+}
+
+.nav-links a{
+  color:#667085;
+  padding:10px 11px;
+  border-radius:10px;
+  font-size:13px;
+  font-weight:750;
+  transition:.2s;
+}
+
+.nav-links a:hover{
+  background:#eef3ff;
+  color:#24509e;
+}
+
+.nav-login{
+  background:#111827!important;
+  color:white!important;
+  padding:11px 15px!important;
+}
+
+.menu-btn{
+  display:none;
+  width:44px;
+  height:44px;
+  border:1px solid #dfe5ef;
+  background:white;
+  border-radius:12px;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+}
+
+.menu-btn span{
+  width:20px;
+  height:2px;
+  border-radius:4px;
+  background:#111827;
+}
+
+.mobile-menu{
+  display:none;
+  padding:8px 0 14px;
+  border-top:1px solid #edf0f5;
+}
+
+.mobile-menu a{
+  display:block;
+  padding:12px 3px;
+  border-bottom:1px solid #edf0f5;
+  color:#475467;
+  font-weight:750;
+}
+
+.mobile-menu.active{
+  display:block;
+}
+
+/* HERO */
+
+.hero{
+  padding:78px 0 60px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 5% 10%,rgba(37,99,235,.11),transparent 30%),
+    radial-gradient(circle at 95% 15%,rgba(124,58,237,.10),transparent 28%);
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:55px;
+  align-items:center;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  border:1px solid #d9e3f7;
+  background:rgba(255,255,255,.82);
+  padding:9px 14px;
+  border-radius:999px;
+  color:#28539b;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+  box-shadow:0 8px 25px rgba(37,99,235,.05);
+}
+
+.badge-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  box-shadow:0 0 0 5px #eaf0ff;
+}
+
+.hero h1{
+  margin:21px 0 20px;
+  max-width:780px;
+  font-size:clamp(46px,6.5vw,76px);
+  line-height:1.01;
+  letter-spacing:-.065em;
+}
+
+.gradient{
+  background:linear-gradient(100deg,#111827 15%,#2563eb 58%,#7c3aed);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero-text{
+  max-width:650px;
+  color:#667085;
+  font-size:18px;
+  line-height:1.7;
+}
+
+.hero-text strong{
+  color:#263244;
+}
+
+.buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:11px;
+  margin-top:27px;
+}
+
+.btn{
+  min-height:50px;
+  padding:0 18px;
+  border-radius:13px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border:1px solid #d9e1eb;
+  background:#fff;
+  color:#172033;
+  font-size:14px;
+  font-weight:850;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.btn-dark{
+  background:#111827;
+  border-color:#111827;
+  color:#fff;
+  box-shadow:0 12px 25px rgba(17,24,39,.18);
+}
+
+.btn-blue{
+  border:0;
+  color:#fff;
+  background:linear-gradient(135deg,#2563eb,#4f46e5);
+  box-shadow:0 12px 28px rgba(37,99,235,.22);
+}
+
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:32px;
+  max-width:620px;
+}
+
+.stat{
+  background:rgba(255,255,255,.86);
+  border:1px solid #e1e7f0;
+  border-radius:16px;
+  padding:16px;
+}
+
+.stat strong{
+  display:block;
+  font-size:23px;
+  letter-spacing:-.04em;
+}
+
+.stat span{
+  display:block;
+  margin-top:2px;
+  color:#7a8494;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+}
+
+/* HERO VISUAL */
+
+.visual{
+  position:relative;
+  overflow:hidden;
+  border:1px solid #dce4f1;
+  border-radius:30px;
+  padding:20px;
+  background:linear-gradient(145deg,#fff,#f0f5ff);
+  box-shadow:0 25px 70px rgba(16,24,40,.10);
+}
+
+.visual::before{
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  right:-90px;
+  top:-90px;
+  border-radius:50%;
+  background:rgba(124,58,237,.14);
+  filter:blur(4px);
+}
+
+.visual::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  left:-90px;
+  bottom:-90px;
+  border-radius:50%;
+  background:rgba(6,182,212,.12);
+}
+
+.chart{
+  position:relative;
+  height:310px;
+  overflow:hidden;
+  border:1px solid #e0e6ef;
+  border-radius:22px;
+  background:#fff;
+}
+
+.chart::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(#edf1f6 1px,transparent 1px),
+    linear-gradient(90deg,#edf1f6 1px,transparent 1px);
+  background-size:42px 42px;
+}
+
+.chart-title{
+  position:absolute;
+  left:17px;
+  top:16px;
+  z-index:2;
+  padding:7px 10px;
+  border-radius:9px;
+  background:#111827;
+  color:#fff;
+  font-size:11px;
+  font-weight:850;
+}
+
+.chart-subtitle{
+  position:absolute;
+  right:17px;
+  top:17px;
+  z-index:2;
+  color:#667085;
+  font-size:10px;
+  font-weight:800;
+}
+
+.line{
+  position:absolute;
+  left:8%;
+  right:7%;
+  top:65%;
+  height:3px;
+  border-radius:10px;
+  background:linear-gradient(90deg,#06b6d4,#2563eb,#7c3aed);
+  transform:rotate(-13deg);
+  box-shadow:0 0 16px rgba(37,99,235,.3);
+}
+
+.candle{
+  position:absolute;
+  width:8px;
+  border-radius:3px;
+  background:#2563eb;
+}
+
+.candle::before{
+  content:"";
+  position:absolute;
+  left:3px;
+  top:-12px;
+  width:2px;
+  height:calc(100% + 24px);
+  background:#94a3b8;
+}
+
+.c1{left:18%;top:57%;height:34px}
+.c2{left:28%;top:48%;height:52px}
+.c3{left:38%;top:52%;height:30px}
+.c4{left:48%;top:40%;height:65px}
+.c5{left:58%;top:43%;height:45px}
+.c6{left:68%;top:31%;height:78px}
+.c7{left:78%;top:22%;height:100px}
+
+.breakout{
+  position:absolute;
+  left:72%;
+  top:26%;
+  height:105px;
+  border-left:2px dashed #7c3aed;
+}
+
+.breakout-label{
+  position:absolute;
+  top:-27px;
+  left:-32px;
+  white-space:nowrap;
+  padding:5px 8px;
+  border-radius:7px;
+  background:#f1ebff;
+  color:#6635c6;
+  font-size:9px;
+  font-weight:900;
+}
+
+.visual-bottom{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin-top:12px;
+}
+
+.visual-stat{
+  background:#fff;
+  border:1px solid #e2e7ef;
+  border-radius:12px;
+  padding:10px;
+}
+
+.visual-stat small{
+  display:block;
+  color:#8992a1;
+  font-size:9px;
+}
+
+.visual-stat strong{
+  font-size:14px;
+}
+
+.live{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:14px;
+  color:#687386;
+  font-size:11px;
+  font-weight:750;
+}
+
+.live-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#16a34a;
+  box-shadow:0 0 0 5px #dcfce7;
+}
+
+/* SECTION */
+
+.section{
+  padding:70px 0;
+}
+
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:30px;
+  margin-bottom:25px;
+}
+
+.section-label{
+  display:inline-block;
+  padding:6px 9px;
+  border-radius:8px;
+  background:#edf3ff;
+  border:1px solid #dbe6fb;
+  color:#315eb4;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+.section h2{
+  margin-top:9px;
+  font-size:clamp(30px,4vw,44px);
+  line-height:1.08;
+  letter-spacing:-.045em;
+}
+
+.section-head p{
+  max-width:470px;
+  margin:0;
+  color:#687386;
+}
+
+/* FRAMEWORK CARDS */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.card{
+  padding:23px;
+  border:1px solid #e0e6ef;
+  border-radius:20px;
+  background:rgba(255,255,255,.9);
+  box-shadow:0 10px 30px rgba(16,24,40,.04);
+}
+
+.card-number{
+  color:#315eb4;
+  font-size:11px;
+  font-weight:900;
+}
+
+.card h3{
+  margin:11px 0 7px;
+  font-size:19px;
+}
+
+.card p{
+  color:#6c7788;
+  font-size:14px;
+}
+
+/* SUPPORT */
+
+.support{
+  margin-top:25px;
+  padding:28px;
+  border:1px solid #dce4f1;
+  border-radius:24px;
+  background:linear-gradient(135deg,#fff,#f0f5ff);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+}
+
+.support h2{
+  font-size:30px;
+  margin-bottom:6px;
+}
+
+.support p{
+  color:#687386;
+}
+
+/* FOOTER */
+
+footer{
+  border-top:1px solid #e2e7ef;
+  padding:28px 0;
+  color:#7a8494;
+  font-size:11px;
+  background:#fff;
+}
+
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .menu-btn{
+    display:flex;
+  }
+
+  .hero-grid{
+    grid-template-columns:1fr;
+  }
+
+  .visual{
+    margin-top:10px;
+  }
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .section-head{
+    display:block;
+  }
+
+  .section-head p{
+    margin-top:12px;
+  }
+}
+
+@media(max-width:600px){
+
+  .container{
+    width:calc(100% - 24px);
+  }
+
+  .topbar{
+    font-size:8px;
+    padding:8px 5px;
+  }
+
+  .nav-inner{
+    min-height:68px;
+  }
+
+  .logo{
+    font-size:13px;
+  }
+
+  .logo-box{
+    width:34px;
+    height:34px;
+    border-radius:10px;
+  }
+
+  .hero{
+    padding:48px 0 40px;
+  }
+
+  .badge{
+    font-size:9px;
+    padding:8px 11px;
+  }
+
+  .hero h1{
+    font-size:47px;
+    line-height:1.01;
+    margin-top:18px;
+  }
+
+  .hero-text{
+    font-size:16px;
+  }
+
+  .buttons{
+    gap:9px;
+  }
+
+  .btn{
+    min-height:47px;
+    padding:0 14px;
+    font-size:13px;
+  }
+
+  .stats{
+    gap:7px;
+  }
+
+  .stat{
+    padding:12px 9px;
+  }
+
+  .stat strong{
+    font-size:19px;
+  }
+
+  .stat span{
+    font-size:8px;
+  }
+
+  .visual{
+    padding:13px;
+    border-radius:22px;
+  }
+
+  .chart{
+    height:250px;
+  }
+
+  .visual-bottom{
+    gap:5px;
+  }
+
+  .visual-stat{
+    padding:8px;
+  }
+
+  .visual-stat strong{
+    font-size:12px;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .section{
+    padding:52px 0;
+  }
+
+  .support{
+    display:block;
+  }
+
+  .support .buttons{
+    margin-bottom:0;
+  }
+
+  .footer-inner{
+    display:block;
+  }
+
+  .footer-inner div{
+    margin:5px 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  EDUCATIONAL PLATFORM · TRADING INVOLVES RISK · NO PROFIT GUARANTEES
+</div>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="container nav-inner">
+
+    <a href="index.html" class="logo">
+      <img class="site-logo" src="assets/srtx-logo.jpg" alt="SURAJTRADERX logo">
+      <span>SURAJTRADERX</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="curriculum.html">Curriculum</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="apply.html">Apply</a>
+      <a href="payment.html">Payment</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html" class="nav-login">Student Login</a>
+    </nav>
+
+    <button class="menu-btn" id="menuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+  <div class="container mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="apply.html">Apply</a>
+    <a href="payment.html">Payment</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html">Student Login</a>
+  </div>
+</header>
+
+
+<!-- HERO -->
+<main>
+
+<section class="hero">
+
+  <div class="container hero-grid">
+
+    <div>
+
+      <div class="badge">
+        <span class="badge-dot"></span>
+        NIFTY 15-MINUTE BREAKOUT STRATEGY
+      </div>
+
+      <h1>
+        Learn NIFTY Trading
+        <span class="gradient">With Structure,</span>
+        Not Noise.
+      </h1>
+
+      <p class="hero-text">
+        Fundamentals of NIFTY trading with a structured
+        15-minute breakout strategy.
+        <strong>No tips. No guarantee.</strong>
+      </p>
+
+      <div class="buttons">
+
+        <a href="curriculum.html" class="btn btn-dark">
+          View Curriculum →
+        </a>
+
+        <a href="pricing.html" class="btn btn-blue">
+          See Plans · ₹1499
+        </a>
+
+      </div>
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong>15M</strong>
+          <span>Primary Timeframe</span>
+        </div>
+
+        <div class="stat">
+          <strong>1:2+</strong>
+          <span>RRR Framework</span>
+        </div>
+
+        <div class="stat">
+          <strong>8+</strong>
+          <span>Learning Modules</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- VISUAL -->
+    <div class="visual">
+
+      <div class="chart">
+
+        <div class="chart-title">
+          NIFTY 15M
+        </div>
+
+        <div class="chart-subtitle">
+          BREAKOUT FRAMEWORK
+        </div>
+
+        <div class="candle c1"></div>
+        <div class="candle c2"></div>
+        <div class="candle c3"></div>
+        <div class="candle c4"></div>
+        <div class="candle c5"></div>
+        <div class="candle c6"></div>
+        <div class="candle c7"></div>
+
+        <div class="line"></div>
+
+        <div class="breakout">
+          <span class="breakout-label">
+            BREAKOUT
+          </span>
+        </div>
+
+      </div>
+
+      <div class="visual-bottom">
+
+        <div class="visual-stat">
+          <small>TIMEFRAME</small>
+          <strong>15 MIN</strong>
+        </div>
+
+        <div class="visual-stat">
+          <small>SETUP</small>
+          <strong>BREAKOUT</strong>
+        </div>
+
+        <div class="visual-stat">
+          <small>FOCUS</small>
+          <strong>RISK</strong>
+        </div>
+
+      </div>
+
+      <div class="live">
+        <span class="live-dot"></span>
+        Educational strategy framework
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- WHAT YOU LEARN -->
+<section class="section">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div>
+        <span class="section-label">
+          STRATEGY FRAMEWORK
+        </span>
+
+        <h2>
+          Learn the process,<br>
+          not random signals.
+        </h2>
+      </div>
+
+      <p>
+        The course focuses on building a structured approach
+        to understanding NIFTY price action, breakout setups,
+        risk management and trading discipline.
+      </p>
+
+    </div>
+
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-number">01 · MARKET</div>
+        <h3>Market Structure</h3>
+        <p>
+          Understand trend, range, support,
+          resistance and important price areas.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-number">02 · SETUP</div>
+        <h3>Breakout Strategy</h3>
+        <p>
+          Study previous-day levels, opening range
+          and confirmation before an entry.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-number">03 · RISK</div>
+        <h3>Risk Management</h3>
+        <p>
+          Learn stop-loss placement, position sizing
+          and risk-to-reward planning.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-number">04 · TEST</div>
+        <h3>Backtesting</h3>
+        <p>
+          Learn how historical charts can be used
+          to test and review a trading strategy.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-number">05 · MINDSET</div>
+        <h3>Trading Psychology</h3>
+        <p>
+          Build discipline, avoid overtrading
+          and maintain a proper trading journal.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-number">06 · EDUCATION</div>
+        <h3>Structured Learning</h3>
+        <p>
+          Follow a clear learning path instead of
+          depending on random market calls.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SUPPORT -->
+<section class="section">
+
+  <div class="container">
+
+    <div class="support">
+
+      <div>
+        <span class="section-label">
+          CHOOSE YOUR LEARNING PLAN
+        </span>
+
+        <h2>
+          Learn with structured support.
+        </h2>
+
+        <p>
+          Basic includes weekly live doubt solving.
+          Premium includes daily live doubt solving
+          and mentorship.
+        </p>
+      </div>
+
+      <div class="buttons">
+
+        <a href="pricing.html" class="btn btn-dark">
+          View Plans →
+        </a>
+
+        <a href="https://t.me/surajtraderx"
+           target="_blank"
+           class="btn">
+          Free Telegram ↗
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer>
+
+  <div class="container footer-inner">
+
+    <div>
+      <strong>SURAJTRADERX</strong>
+      · Educational Trading Platform
+    </div>
+
+    <div>
+      © 2026 SURAJTRADERX · Trading involves risk.
+      No profit guarantees.
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+menuBtn.addEventListener("click", function(){
+
+  mobileMenu.classList.toggle("active");
+
+  const isOpen = mobileMenu.classList.contains("active");
+
+  menuBtn.setAttribute(
+    "aria-label",
+    isOpen ? "Close menu" : "Open menu"
+  );
+
+});
+
+document.querySelectorAll(".mobile-menu a").forEach(function(link){
+
+  link.addEventListener("click",function(){
+    mobileMenu.classList.remove("active");
+  });
+
+});
+</script>
+
+</body>
+</html>
